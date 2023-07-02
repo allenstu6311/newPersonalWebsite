@@ -4,23 +4,21 @@ import VueRouter from 'vue-router'
 import router from './router'
 import "./assets/static/css/global.css"
 import "./assets/static/js/util"
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(VueRouter)
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 new Vue({
     router,
     el: '#app',
     render: (h) => h(App),
-    data:function(){
-        return{
-            test:1234
-        }
-    },
-    mounted(){
-        // console.log(this.test)
-    },
-
-
 }).$mount('#app');
 
 
