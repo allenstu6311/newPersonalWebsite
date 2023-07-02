@@ -1,0 +1,30 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.1",
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^3.5.3",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "@webpack-cli/serve": "^2.0.5",
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
