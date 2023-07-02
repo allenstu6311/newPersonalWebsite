@@ -22,7 +22,7 @@ export default class App extends Vue {
   public test: number = 123;
 
   Hello() {
-    // this.test += 1;
+    this.test += 1;
 
   }
 
