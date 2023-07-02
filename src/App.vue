@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <Header :index="test"></Header>
     <router-view></router-view>
   </div>
 </template>
@@ -20,7 +20,7 @@ import Vue from "vue";
 export default class App extends Vue {
   private Name: string = "Test";
   private Title: string = "Title";
-  public test: number = 123;
+  public test :string= 'test';
   
 }
 </script>
