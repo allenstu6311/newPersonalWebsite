@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="header">
     <b-nav>
-      <b-nav-item href="#banner">Home</b-nav-item>
-      <b-nav-item href="#about">About</b-nav-item>
-      <b-nav-item href="#project">Project</b-nav-item>
-    
-      <!-- <b-nav-item v-for="item in route" :key="item.name" :to="item.path">
-        {{ item.name }}
-      </b-nav-item> -->
+      <icon-list></icon-list>
+      <div class="d-flex">
+        <b-nav-item href="#banner">Home</b-nav-item>
+        <b-nav-item href="#about">About</b-nav-item>
+        <b-nav-item href="#project">Project</b-nav-item>
+        <b-nav-item href="#footer">Footer</b-nav-item>
+      </div>
     </b-nav>
   </div>
 </template>
@@ -17,10 +17,13 @@ import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import Vue from "vue";
 import { routes } from "../router/index";
-
+import IconList from "./tool/IconList.vue";
 
 @Component({
   props: ["index"],
+  components: {
+    IconList,
+  },
 })
 export default class Header extends Vue {
   @Prop(String) index!: string;
@@ -37,6 +40,13 @@ export default class Header extends Vue {
 }
 </script>
 <style>
+.header {
+  width: 100%;
+  background-color: var(--bs-body-bg);
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
 .nav {
   --bs-nav-link-padding-x: 2rem !important;
   --bs-nav-link-padding-y: 1.5rem !important;
@@ -44,16 +54,15 @@ export default class Header extends Vue {
   --bs-nav-link-color: var(--bs-black);
   --bs-nav-link-hover-color: var(--bs-link-hover-color);
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
-  background-color: var(--bs-border-color);
-  width: 100%;
+  margin: auto;
+  max-width: 1440px;
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
-  justify-content: center;
-  position: fixed;
-  top: 0;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-link {

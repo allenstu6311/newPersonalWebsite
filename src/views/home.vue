@@ -1,9 +1,11 @@
 <template>
-  <div class="">
+  <div class="home">
     <Header :index="test" @routeInfo="routeInfo"></Header>
+    <!-- 背景圖片 -->
     <Banner></Banner>
     <About></About>
     <Project></Project>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -13,6 +15,7 @@ import Header from "../components/Header.vue";
 import Banner from "../components/Banner.vue";
 import About from "../components/About.vue";
 import Project from "../components/Project.vue";
+import Footer from "../components/Footer.vue";
 import Component from "vue-class-component";
 import Vue from "vue";
 
@@ -23,6 +26,7 @@ import Vue from "vue";
     Banner,
     About,
     Project,
+    Footer,
   },
 })
 export default class home extends Vue {
@@ -36,4 +40,5 @@ export default class home extends Vue {
 }
 </script>
 <style>
+
 </style>

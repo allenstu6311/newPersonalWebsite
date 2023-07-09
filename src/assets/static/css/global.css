@@ -1,4 +1,5 @@
-root, [data-bs-theme=light] {
+root,
+[data-bs-theme=light] {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
@@ -115,4 +116,28 @@ root, [data-bs-theme=light] {
     --bs-form-valid-border-color: #198754;
     --bs-form-invalid-color: #dc3545;
     --bs-form-invalid-border-color: #dc3545;
+}
+
+/* 容器 */
+
+.custom-container{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.row{
+    height: inherit;
+}
+
+/* 圖片 */
+.bg-pic {
+    width: 100%;
+    height: 100vh;
+    background-attachment: fixed !important;
+    z-index: -1;
+}
+
+img{
+    width: 100%;
+    height: 100% !important;
 }
