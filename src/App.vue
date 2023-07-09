@@ -1,33 +1,23 @@
 <template>
+  <!-- https://zh.wix.com/website-template/view/html/1887?originUrl=https%3A%2F%2Fzh.wix.com%2Fwebsite%2Ftemplates%2Fhtml%2Fportfolio-cv%2Fpersonal&tpClick=view_button&esi=aadd66cb-30de-48bf-ac46-163b36c82fd7 -->
   <div id="app">
-    <Header :index="test"></Header>
     <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
-import Header from "./components/Header.vue";
 import Component from "vue-class-component";
 import Vue from "vue";
 
-@Component({
-  //引入組件
-  components:{
-    Header,
-  }
-})
+@Component
 
-export default class App extends Vue {
-  private Name: string = "Test";
-  private Title: string = "Title";
-  public test :string= 'test';
-  
-}
+export default class App extends Vue {}
 </script>
 
 <style>
-h1 {
-  color: green;
+#app{
+  overflow: hidden;
 }
+
 </style>
 
