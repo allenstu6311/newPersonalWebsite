@@ -1,17 +1,17 @@
 <template>
   <div id="about">
-    <b-row>
+    <b-row class="custom-row">
       <b-col class="pic">
-        <b-img
+        <!-- <b-img
           src="https://picsum.photos/300/150/?image=42"
           fluid
           alt="Responsive image"
           v-bind="mainProps"
-        ></b-img>
+        ></b-img> -->
       </b-col>
       <b-col class="content">
         <b-col class="title">
-          <h1>ABOUT ME!</h1>
+          <h1 class="bold">ABOUT ME !</h1>
         </b-col>
         <b-col class="text">
           <p>
@@ -20,17 +20,10 @@
           <p>
             在這個關鍵的時刻，我接受了親友的介紹，進入了TibaMe緯育的前端工程師專業進修課程。我對於寫程式抱有極大的興趣，並在進修期間驚喜地發現自己能夠超前進度地學習。我的好奇心驅使著我不斷探索新事物，追求新的知識。進入職場後，我發現自己之前所學僅僅只是冰山一角。真正軟體開發的流程和技術令我吃驚，但我並沒有因此感到沮喪，反而被未知的世界點燃了學習的欲望之火！我渴望不斷精進自己的技能，並以最快的速度成為一位資深工程師。
           </p>
-          <!-- <p>
-            在公司專案中我主要負責前端UI開發以及API的串接以及一些後端的修改，前端排版主要使用element
-            plus以及bootstrap，目前框架都是使用Vue為主，後端的部分有接觸一點Node.js以及java，因為目前待的是接案公司，所以在工作上經常接觸到各種不同的語言及工具，學習起來非常過癮。
-          </p> -->
-          <!-- <p>
-            這段轉職之旅讓我更加堅信，無論是在球場還是在程式碼之中，成功都來自於對於目標的熱情和不斷的努力。
-            我的棒球背景教會了我團隊合作和面對困難的勇氣。這些特質在我前端工程師的職業生涯中將成為我堅強的後盾。我期待著這個不斷成長和創造的領域，並希望藉由我的技術和創意，為用戶帶來優質的網站和應用程式體驗。我相信通過我的持續學習和實踐，我將能夠為團隊帶來價值，並不斷提升自己的專業能力。
-          </p> -->
         </b-col>
+        <!-- 按鈕 -->
         <b-col class="button">
-          <Button label="See Resume"></Button>
+          <Button label="查看簡歷"></Button>
         </b-col>
       </b-col>
     </b-row>
@@ -59,24 +52,22 @@ export default class Banner extends Vue {
 }
 .content .title {
   text-align: center;
-  padding: 20px;
+  padding: 50px 20px;
 }
 .content .title h1 {
   letter-spacing: 3px;
-  font-weight: bold;
   font-size: 50px;
 }
-
 .content .text {
   width: 80%;
   margin: auto;
-  line-height: 1.5;
-  font-size: 18px;
+  line-height: 2;
+  font-size: 14px;
   letter-spacing: 2px;
 }
 .content .button {
-  width: 100%;
-  padding: 20px;
-  text-align: center;
+  width: 80%;
+  padding-bottom: 30px;
+  margin: auto;
 }
 </style>

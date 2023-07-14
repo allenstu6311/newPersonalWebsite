@@ -1,11 +1,10 @@
 <template>
   <div class="home">
-    <Header :index="test" @routeInfo="routeInfo"></Header>
-    <!-- 背景圖片 -->
+    <!-- <Header :index="test" @routeInfo="routeInfo"></Header> -->
     <Banner></Banner>
     <About></About>
     <Project></Project>
-    <Footer></Footer>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 
@@ -22,11 +21,11 @@ import Vue from "vue";
 @Component({
   //引入組件
   components: {
-    Header,
+    // Header,
     Banner,
     About,
     Project,
-    Footer,
+    // Footer,
   },
 })
 export default class home extends Vue {

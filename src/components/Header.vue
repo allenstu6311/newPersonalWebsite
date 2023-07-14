@@ -1,12 +1,13 @@
 <template>
-  <div class="header">
+  <div class="header" ref="headerHeight">
     <b-nav>
       <icon-list></icon-list>
       <div class="d-flex">
-        <b-nav-item href="#banner">Home</b-nav-item>
-        <b-nav-item href="#about">About</b-nav-item>
-        <b-nav-item href="#project">Project</b-nav-item>
-        <b-nav-item href="#footer">Footer</b-nav-item>
+        <b-nav-item @click="scrollTo('#banner')">Home</b-nav-item>
+        <b-nav-item @click="scrollTo('#about')">About</b-nav-item>
+        <b-nav-item @click="scrollTo('#project')">Project</b-nav-item>
+        <b-nav-item @click="scrollTo('#footer')">Footer</b-nav-item>
+        <b-nav-item to="/vitae">vitae</b-nav-item>
       </div>
     </b-nav>
   </div>
@@ -29,13 +30,34 @@ export default class Header extends Vue {
   @Prop(String) index!: string;
   public route = routes;
   public propTest: string = this.index;
+  public headerHeightInfo: number = 0
+
 
   moveTo(route: string) {
     this.$emit("routeInfo", route);
   }
+  // 移動到目標區域
+  scrollTo(target: string) {
+    if (this.$route.path != '/') {
+      this.$router.push('/')
+    }
+
+    this.$nextTick(() => {
+      const element: any = document.querySelector(target);
+      if (element) {
+        const offset = this.headerHeightInfo; // 調整的像素距離
+        window.scrollTo({
+          top: element.offsetTop - offset,
+          behavior: 'smooth' // 捲動的動畫效果
+        });
+      }
+    })
+
+  }
 
   mounted() {
-    console.log(this.index);
+    const headerHeightElement = this.$refs.headerHeight as HTMLElement;
+    this.headerHeightInfo = headerHeightElement.clientHeight
   }
 }
 </script>
@@ -46,7 +68,9 @@ export default class Header extends Vue {
   position: fixed;
   top: 0;
   z-index: 100;
+  box-shadow: 0px 0px 5px 2px var(--bs-dark-border-subtle);
 }
+
 .nav {
   --bs-nav-link-padding-x: 2rem !important;
   --bs-nav-link-padding-y: 1.5rem !important;
@@ -55,7 +79,7 @@ export default class Header extends Vue {
   --bs-nav-link-hover-color: var(--bs-link-hover-color);
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
   margin: auto;
-  max-width: 1440px;
+  max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;

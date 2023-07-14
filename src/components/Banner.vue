@@ -6,7 +6,7 @@
       <!-- 標題 -->
       <b-col class="title">
         <div class="title-main">
-          <h1>ALLEN LI</h1>
+          <h1 class="bold">ALLEN LI</h1>
         </div>
         <div class="title-subtitle">
           <h3>Front-end Engineer</h3>
@@ -47,7 +47,7 @@ export default class Banner extends Vue {
   text-align: center;
   flex-wrap: wrap;
   position: absolute;
-  top:45%;
+  top:35%;
   left: 8%;
   margin: auto;
   letter-spacing: 5px;
@@ -57,7 +57,7 @@ export default class Banner extends Vue {
   width: 100%;
 }
 .title-main h1 {
-  font-size: 170px;
+  font-size: 130px;
   font-weight: 900;
 }
 .title-subtitle {

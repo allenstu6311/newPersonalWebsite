@@ -1,11 +1,17 @@
 import VueRouter from 'vue-router'
 import home from "../views/home.vue"
+import vitae from "../views/vitae.vue"
 
 export const routes = [
     {
         path: '/',
         name: '首頁',
         component: home
+    },
+    {
+        path: '/vitae',
+        name: '簡歷',
+        component: vitae
     },
     {
         path: '/*',

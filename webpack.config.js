@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/main.ts',
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
     },
     mode: "development",
     devtool: "source-map",
@@ -26,12 +26,17 @@ module.exports = {
             {
                 test: /\.vue$/,
                 use: 'vue-loader',
+            },
+            {
+                test: /\.pdf$/i,
+                loader: 'file-loader',
             }
         ]
     },
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.js',
+            '@': path.resolve(__dirname, 'src/assets/image') 
         },
         extensions: ['.ts', '.js', '.vue'],
     },

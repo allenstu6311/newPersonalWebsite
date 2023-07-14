@@ -21,6 +21,7 @@ Vue.component('BIconArrowDown', BIconArrowDown)
 new Vue({
     router,
     el: '#app',
+    //render 負責將模板轉換成虛擬DOM
     render: (h) => h(App),
 }).$mount('#app');
 

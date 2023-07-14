@@ -1,24 +1,28 @@
 <template>
   <div id="project" class="custom-container">
+
     <b-row>
       <!-- 圖片 -->
-      <b-col class="bg-pic">
-      </b-col>
+  
+        <b-col class="bg-pic">
 
-      <!-- 標題 -->
-      <b-col class="title">
-        <div class="title-main">
-          <h1>ALLEN LI</h1>
-        </div>
-        <div class="title-subtitle">
-          <h3>Front-end Engineer</h3>
-        </div>
-      </b-col>
+        </b-col>
+
+
+        <!-- 標題 -->
+        <b-col class="title">
+          <div class="title-main">
+            <h1>ALLEN LI</h1>
+          </div>
+          <div class="title-subtitle">
+            <h3>Front-end Engineer</h3>
+          </div>
+        </b-col>
     </b-row>
   </div>
 </template>
   
-  <script lang="ts">
+<script lang="ts">
 import Component from "vue-class-component";
 import Vue from "vue";
 
@@ -30,7 +34,7 @@ export default class Project extends Vue {
   };
 }
 </script>
-  <style scoped>
+<style scoped>
 #project .bg-pic {
   background: url('https://picsum.photos/300/150/?image=43');
 }
@@ -48,13 +52,16 @@ export default class Project extends Vue {
   letter-spacing: 5px;
   color: var(--bs-body-bg);
 }
+
 .title-main {
   width: 100%;
 }
+
 .title-main h1 {
   font-size: 170px;
   font-weight: 900;
 }
+
 .title-subtitle {
   width: 100%;
 }
