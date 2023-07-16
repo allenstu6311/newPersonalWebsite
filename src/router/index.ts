@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
 import home from "../views/home.vue"
-import vitae from "../views/vitae.vue"
+import project from "../views/project.vue"
 
 export const routes = [
     {
@@ -9,9 +9,9 @@ export const routes = [
         component: home
     },
     {
-        path: '/vitae',
-        name: '簡歷',
-        component: vitae
+        path: '/project',
+        name: 'ˊ專案經驗',
+        component: project
     },
     {
         path: '/*',

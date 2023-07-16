@@ -3,11 +3,29 @@
     <b-nav>
       <icon-list></icon-list>
       <div class="d-flex">
-        <b-nav-item @click="scrollTo('#banner')">Home</b-nav-item>
-        <b-nav-item @click="scrollTo('#about')">About</b-nav-item>
-        <b-nav-item @click="scrollTo('#project')">Project</b-nav-item>
-        <b-nav-item @click="scrollTo('#footer')">Footer</b-nav-item>
-        <b-nav-item to="/vitae">vitae</b-nav-item>
+        <b-nav-item
+          @click="scrollTo('#banner')"
+          :class="{ active: active == '#banner' }"
+          >Home</b-nav-item
+        >
+        <b-nav-item
+          @click="scrollTo('#about')"
+          :class="{ active: active == '#about' }"
+          >About</b-nav-item
+        >
+        <b-nav-item
+          @click="scrollTo('#technology')"
+          :class="{ active: active == '#technology' }"
+          >Technology</b-nav-item
+        >
+        <b-nav-item
+          @click="scrollTo('#footer')"
+          :class="{ active: active == '#footer' }"
+          >Footer</b-nav-item
+        >
+        <b-nav-item to="/project" :class="{ active: active == '#project' }"
+          >project</b-nav-item
+        >
       </div>
     </b-nav>
   </div>
@@ -30,16 +48,18 @@ export default class Header extends Vue {
   @Prop(String) index!: string;
   public route = routes;
   public propTest: string = this.index;
-  public headerHeightInfo: number = 0
-
+  public headerHeightInfo: number = 0;
+  public scrollY: number = 0;
+  public active: string = "";
+  public isCalculating: boolean = false;
 
   moveTo(route: string) {
     this.$emit("routeInfo", route);
   }
   // 移動到目標區域
   scrollTo(target: string) {
-    if (this.$route.path != '/') {
-      this.$router.push('/')
+    if (this.$route.path != "/") {
+      this.$router.push("/");
     }
 
     this.$nextTick(() => {
@@ -48,16 +68,46 @@ export default class Header extends Vue {
         const offset = this.headerHeightInfo; // 調整的像素距離
         window.scrollTo({
           top: element.offsetTop - offset,
-          behavior: 'smooth' // 捲動的動畫效果
+          behavior: "smooth", // 捲動的動畫效果
         });
       }
-    })
+    });
+  }
+  // 取得滾輪當前位置
+  getScrollHeight() {
+    console.log("path", this.$route.path);
+    if (this.$route.path != "/") {
+      this.active = "#project";
+    } else {
+      this.scrollY =
+        document.documentElement.scrollTop + this.headerHeightInfo + 100;
+      this.getComponentHeight("#banner");
+      this.getComponentHeight("#about");
+      this.getComponentHeight("#technology");
+      this.getComponentHeight("#footer");
+    }
+  }
 
+  //取得組件的範圍並且判斷
+  getComponentHeight(target: string) {
+    this.$nextTick(() => {
+      let targetElement: any = document.querySelector(target);
+      const targetRect = targetElement.getBoundingClientRect();
+      const top = targetRect.top + window.pageYOffset;
+      const bottom = targetRect.bottom + window.pageYOffset;
+      const isInRange = this.scrollY > top && this.scrollY < bottom;
+
+      if (isInRange) {
+        this.active = target;
+      }
+    });
   }
 
   mounted() {
     const headerHeightElement = this.$refs.headerHeight as HTMLElement;
-    this.headerHeightInfo = headerHeightElement.clientHeight
+    this.headerHeightInfo = headerHeightElement.clientHeight;
+    window.addEventListener("load", this.getScrollHeight);
+    window.addEventListener("scroll", this.getScrollHeight);
   }
 }
 </script>
@@ -76,7 +126,7 @@ export default class Header extends Vue {
   --bs-nav-link-padding-y: 1.5rem !important;
   --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-black);
-  --bs-nav-link-hover-color: var(--bs-link-hover-color);
+  --bs-nav-link-hover-color: var(--bs-black);
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
   margin: auto;
   max-width: 1200px;
@@ -101,5 +151,12 @@ export default class Header extends Vue {
   border: 0;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
+}
+.active a {
+  color: var(--bs-link-hover-color) !important;
+}
+.nav-link:hover,
+.nav-link:focus {
+  --bs-nav-link-hover-color: var(--bs-black);
 }
 </style>

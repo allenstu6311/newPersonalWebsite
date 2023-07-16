@@ -40,27 +40,27 @@ export default class Banner extends Vue {
     top: 0;
     left: 0;
 }
-.title {
+#banner .title {
   width: 80%;
   display: flex;
   justify-content: space-around;
   text-align: center;
   flex-wrap: wrap;
   position: absolute;
-  top:35%;
+  top:45%;
   left: 8%;
   margin: auto;
   letter-spacing: 5px;
   color: var(--bs-body-bg);
 }
-.title-main {
+#banner .title-main {
   width: 100%;
 }
-.title-main h1 {
+#banner .title-main h1 {
   font-size: 130px;
   font-weight: 900;
 }
-.title-subtitle {
+#banner .title-subtitle {
   width: 100%;
 }
 #banner > .row {

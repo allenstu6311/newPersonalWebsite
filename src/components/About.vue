@@ -23,27 +23,58 @@
         </b-col>
         <!-- 按鈕 -->
         <b-col class="button">
-          <Button label="查看簡歷"></Button>
+          <Button
+            label="查看簡歷"
+            id="tooltip-target-1"
+            @btnOnClick="$bvModal.show('bv-modal-resume')"
+          ></Button>
+          <!-- tip -->
+          <b-tooltip
+            target="tooltip-target-1"
+            triggers="hover"
+            placement="left"
+         
+          >
+            <embed
+              :src="pdfPath"
+              type="application/pdf"
+              width="100%"
+              height="100%"
+            />
+          </b-tooltip>
         </b-col>
       </b-col>
     </b-row>
+    <!-- 履歷燈箱 -->
+    <b-modal
+      id="bv-modal-resume"
+      ok-title="下載"
+      cancel-title="關閉"
+      @ok="download"
+    >
+      <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
+    </b-modal>
   </div>
 </template>
 <script lang="ts">
 import Component from "vue-class-component";
 import Vue from "vue";
 import Button from "../components/tool/Button.vue";
+import pdfData from "../assets/image/vitae.pdf";
+import { saveAs } from "file-saver";
 
 @Component({
   components: {
     Button,
   },
 })
-export default class Banner extends Vue {
-  mainProps = {
-    center: true,
-    fluidGrow: true,
-  };
+export default class About extends Vue {
+  public pdfPath: string = pdfData;
+
+  download() {
+    // 下載檔案
+    saveAs(this.pdfPath, "履歷.pdf");
+  }
 }
 </script>
 <style scoped>
@@ -70,4 +101,8 @@ export default class Banner extends Vue {
   padding-bottom: 30px;
   margin: auto;
 }
+.tooltip {
+  cursor: pointer;
+}
 </style>
+
