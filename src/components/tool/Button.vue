@@ -1,9 +1,7 @@
 <template>
-  <div class="">
-    <b-button class="custom-button mt-3" variant="dark" :id="id" @click="btonOnclick">{{
-      label
-    }}</b-button>
-  </div>
+  <b-button class="custom-button mt-3" variant="dark" :id="id" @click="btonOnclick">{{
+    label
+  }}</b-button>
 </template>
 
 <script lang="ts">
@@ -14,7 +12,7 @@ import Vue from "vue";
 @Component({
   props: {
     label: String,
-    id:String
+    id: String
   },
 })
 export default class Button extends Vue {
@@ -29,12 +27,14 @@ export default class Button extends Vue {
 </script>
 <style>
 .custom-button {
-  width: 150px;
-  padding: 10px 15px;
+  width: 150px !important;
+  padding: 10px 15px !important;
 }
-.tooltip{
-  left: -20px !important; 
+
+.tooltip {
+  left: -20px !important;
 }
+
 .tooltip .arrow {
   width: 0;
   height: 0;
@@ -44,5 +44,4 @@ export default class Button extends Vue {
   position: absolute;
   left: 100%;
 }
-
 </style>

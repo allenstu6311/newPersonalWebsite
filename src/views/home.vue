@@ -2,7 +2,9 @@
   <div class="home">
     <Banner></Banner>
     <About></About>
+    <Experience></Experience>
     <Technology></Technology>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -13,13 +15,17 @@ import About from "../components/About.vue";
 import Technology from "../components/Technology.vue";
 import Component from "vue-class-component";
 import Vue from "vue";
+import Footer from "../components/Footer.vue";
+import Experience from "../components/Experience.vue";
 
 @Component({
   //引入組件
   components: {
     Banner,
     About,
-    Technology
+    Technology,
+    Experience,
+    Footer
   },
 })
 export default class home extends Vue {

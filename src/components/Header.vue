@@ -1,31 +1,14 @@
 <template>
   <div class="header" ref="headerHeight">
-    <b-nav>
+    <b-nav class="custom-row">
       <icon-list></icon-list>
       <div class="d-flex">
-        <b-nav-item
-          @click="scrollTo('#banner')"
-          :class="{ active: active == '#banner' }"
-          >Home</b-nav-item
-        >
-        <b-nav-item
-          @click="scrollTo('#about')"
-          :class="{ active: active == '#about' }"
-          >About</b-nav-item
-        >
-        <b-nav-item
-          @click="scrollTo('#technology')"
-          :class="{ active: active == '#technology' }"
-          >Technology</b-nav-item
-        >
-        <b-nav-item
-          @click="scrollTo('#footer')"
-          :class="{ active: active == '#footer' }"
-          >Footer</b-nav-item
-        >
-        <b-nav-item to="/project" :class="{ active: active == '#project' }"
-          >project</b-nav-item
-        >
+        <b-nav-item @click="scrollTo('#banner')" :class="{ active: active == '#banner' }">Home</b-nav-item>
+        <b-nav-item @click="scrollTo('#about')" :class="{ active: active == '#about' }">About</b-nav-item>
+        <b-nav-item @click="scrollTo('#experince')" :class="{ active: active == '#experince' }">experince</b-nav-item>
+        <b-nav-item @click="scrollTo('#technology')" :class="{ active: active == '#technology' }">Technology</b-nav-item>
+        <b-nav-item @click="scrollTo('#footer')" :class="{ active: active == '#footer' }">Contact</b-nav-item>
+        <!-- <b-nav-item to="/project" :class="{ active: active == '#project' }">Project</b-nav-item> -->
       </div>
     </b-nav>
   </div>
@@ -33,7 +16,7 @@
 
 <script lang="ts">
 import Component from "vue-class-component";
-import { Prop } from "vue-property-decorator";
+import { Prop,Watch } from "vue-property-decorator";
 import Vue from "vue";
 import { routes } from "../router/index";
 import IconList from "./tool/IconList.vue";
@@ -53,16 +36,24 @@ export default class Header extends Vue {
   public active: string = "";
   public isCalculating: boolean = false;
 
-  moveTo(route: string) {
-    this.$emit("routeInfo", route);
-  }
+  //監聽route
+  // @Watch("$route", { deep: true })
+  // onWatchLabelChanded(newVal:any, oldVal:any) {
+  //   if(newVal.name == 'project'){
+  //     this.active = '#project'
+  //   }
+  // }
+
   // 移動到目標區域
   scrollTo(target: string) {
-    if (this.$route.path != "/") {
+    if (this.$route.path != '/') {
       this.$router.push("/");
+      this.getScrollHeight()
     }
 
+    
     this.$nextTick(() => {
+      console.log(this.$route.name)
       const element: any = document.querySelector(target);
       if (element) {
         const offset = this.headerHeightInfo; // 調整的像素距離
@@ -75,7 +66,7 @@ export default class Header extends Vue {
   }
   // 取得滾輪當前位置
   getScrollHeight() {
-    console.log("path", this.$route.path);
+
     if (this.$route.path != "/") {
       this.active = "#project";
     } else {
@@ -84,6 +75,7 @@ export default class Header extends Vue {
       this.getComponentHeight("#banner");
       this.getComponentHeight("#about");
       this.getComponentHeight("#technology");
+      this.getComponentHeight("#experince");
       this.getComponentHeight("#footer");
     }
   }
@@ -152,9 +144,11 @@ export default class Header extends Vue {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
 }
+
 .active a {
   color: var(--bs-link-hover-color) !important;
 }
+
 .nav-link:hover,
 .nav-link:focus {
   --bs-nav-link-hover-color: var(--bs-black);

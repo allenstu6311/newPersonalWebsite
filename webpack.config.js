@@ -30,13 +30,24 @@ module.exports = {
             {
                 test: /\.pdf$/i,
                 loader: 'file-loader',
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                      loader: 'url-loader', // 將 file-loader 更改為 url-loader
+                      options: {
+                        name: '[name].[ext]',
+                      },
+                    },
+                  ],
             }
         ]
     },
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.js',
-            '@': path.resolve(__dirname, 'src/assets/image') 
+            '@': path.resolve(__dirname, 'src/assets/image')
         },
         extensions: ['.ts', '.js', '.vue'],
     },

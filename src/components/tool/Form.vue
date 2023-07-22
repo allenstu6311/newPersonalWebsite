@@ -4,14 +4,15 @@
       <b-row>
         <b-col>
           <input-box
-            label="First Name"
+            label="First Name *"
             @inputBoxOnChange="firstNameOnChange"
             ref="firstName"
+            type="name"
           ></input-box>
         </b-col>
         <b-col>
           <input-box
-            label="Last Name"
+            label="Last Name *"
             @inputBoxOnChange="lastNameOnChange"
             ref="lastName"
           ></input-box>
@@ -49,10 +50,10 @@
       </b-row>
     </b-form>
     <!-- 燈箱 -->
-    <b-modal id="my-modal" @ok="sendEmail" ok-title="送出" cancel-title="取消"> 確定送出? </b-modal>
+    <b-modal id="my-modal" centered @ok="sendEmail" ok-title="送出" cancel-title="取消"> 確定送出? </b-modal>
     <!-- 送出訊息 -->
     <div>
-      <b-toast id="my-toast" :variant="sendStatus" solid>
+      <b-toast id="form-toast" :variant="sendStatus" solid>
         <template #toast-title>
           <div class="d-flex flex-grow-1 align-items-baseline">
             <strong class="mr-auto">通知</strong>
@@ -150,7 +151,7 @@ export default class Form extends Vue {
         // 觸發訊息
         this.sendResult = "送出成功";
         this.sendStatus = "warning";
-        this.$bvToast.show("my-toast");
+        this.$bvToast.show("form-toast");
         //清空輸入框訊息
         this.SharedMixin.getChildComponent(this.$refs.firstName, "clearInput");
         this.SharedMixin.getChildComponent(this.$refs.lastName, "clearInput");
@@ -161,13 +162,9 @@ export default class Form extends Vue {
       .catch(() => {
         this.sendResult = "送出失敗";
         this.sendStatus = "danger";
-        this.$bvToast.show("my-toast");
+        this.$bvToast.show("form-toast");
       });
   }
 }
 </script>
-<style>
-.toast {
-  display: block !important;
-}
-</style>
+<style></style>

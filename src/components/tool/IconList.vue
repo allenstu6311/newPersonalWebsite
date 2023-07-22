@@ -2,7 +2,7 @@
   <div class="mb-0 icon-list">
     <b-icon icon="facebook" variant="dark" class="icon"></b-icon>
     <b-icon icon="instagram" variant="dark" class="icon"></b-icon>
-    <b-icon icon="whatsapp" variant="dark" class="icon"></b-icon>
+    <b-icon icon="github" variant="dark" class="icon"></b-icon>
   </div>
 </template>
 

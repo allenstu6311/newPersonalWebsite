@@ -1,13 +1,9 @@
 <template>
   <div id="about">
     <b-row class="custom-row">
+      <!-- 個人照片 -->
       <b-col class="pic">
-        <!-- <b-img
-          src="https://picsum.photos/300/150/?image=42"
-          fluid
-          alt="Responsive image"
-          v-bind="mainProps"
-        ></b-img> -->
+        <b-img :src="picPath" rounded="circle" fluid alt="Responsive image"></b-img>
       </b-col>
       <b-col class="content">
         <b-col class="title">
@@ -23,37 +19,29 @@
         </b-col>
         <!-- 按鈕 -->
         <b-col class="button">
-          <Button
-            label="查看簡歷"
-            id="tooltip-target-1"
-            @btnOnClick="$bvModal.show('bv-modal-resume')"
-          ></Button>
+          <Button label="查看簡歷" id="tooltip-target-1" @btnOnClick="$bvModal.show('bv-modal-resume')"></Button>
           <!-- tip -->
-          <b-tooltip
-            target="tooltip-target-1"
-            triggers="hover"
-            placement="left"
-         
-          >
-            <embed
-              :src="pdfPath"
-              type="application/pdf"
-              width="100%"
-              height="100%"
-            />
+          <b-tooltip target="tooltip-target-1" triggers="hover" placement="left">
+            <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
           </b-tooltip>
         </b-col>
       </b-col>
     </b-row>
     <!-- 履歷燈箱 -->
-    <b-modal
-      id="bv-modal-resume"
-      ok-title="下載"
-      cancel-title="關閉"
-      @ok="download"
-    >
+    <b-modal id="bv-modal-resume" ok-title="下載" cancel-title="關閉" @ok="openCheckModal">
       <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
     </b-modal>
+    <!-- 確認燈箱 -->
+    <b-modal id="bv-modal-check" centered ok-title="確定" cancel-title="取消" @ok="download">確定下載?</b-modal>
+    <!-- 通知訊息 -->
+    <b-toast id="download-toast" :variant="sendStatus" solid>
+      <template #toast-title>
+        <div class="d-flex flex-grow-1 align-items-baseline">
+          <strong class="mr-auto">通知</strong>
+        </div>
+      </template>
+      {{ sendResult }}
+    </b-toast>
   </div>
 </template>
 <script lang="ts">
@@ -61,6 +49,7 @@ import Component from "vue-class-component";
 import Vue from "vue";
 import Button from "../components/tool/Button.vue";
 import pdfData from "../assets/image/vitae.pdf";
+import personalphoto from "../assets/image/personalphoto.jpg";
 import { saveAs } from "file-saver";
 
 @Component({
@@ -70,10 +59,29 @@ import { saveAs } from "file-saver";
 })
 export default class About extends Vue {
   public pdfPath: string = pdfData;
+  public picPath: any = personalphoto
+  public sendResult: string = "";
+  public sendStatus: string = "";
+
+  openCheckModal(e:any){
+    e.preventDefault();
+    this.$bvModal.show('bv-modal-check')
+  }
 
   download() {
-    // 下載檔案
-    saveAs(this.pdfPath, "履歷.pdf");
+    try {
+      // 下載檔案
+      saveAs(this.pdfPath, "履歷.pdf")
+      this.sendResult = "下載成功";
+      this.sendStatus = "warning";
+      this.$bvToast.show("download-toast");
+
+    } catch (err) {
+      this.sendResult = "下載失敗";
+      this.sendStatus = "danger";
+      this.$bvToast.show("download-toast");
+    }
+
   }
 }
 </script>
@@ -81,14 +89,29 @@ export default class About extends Vue {
 #about {
   background-color: var(--bs-teal);
 }
+
+#about .pic {
+  padding: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#about .pic img {
+  width: 70%;
+  box-shadow: 0px 0px 10px rgb(163, 162, 162);
+}
+
 .content .title {
   text-align: center;
   padding: 50px 20px;
 }
+
 .content .title h1 {
   letter-spacing: 3px;
   font-size: 50px;
 }
+
 .content .text {
   width: 80%;
   margin: auto;
@@ -96,11 +119,13 @@ export default class About extends Vue {
   font-size: 14px;
   letter-spacing: 2px;
 }
+
 .content .button {
   width: 80%;
   padding-bottom: 30px;
   margin: auto;
 }
+
 .tooltip {
   cursor: pointer;
 }

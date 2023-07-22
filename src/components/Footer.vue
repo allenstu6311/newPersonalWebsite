@@ -1,6 +1,6 @@
 <template>
   <div id="footer" class="custom-container">
-    <b-col class="col-6  custom-row">
+    <b-row class="custom-row">
       <!-- 標題 -->
       <b-row class="title">
         <b-col class="">
@@ -10,19 +10,16 @@
       <!-- 表單區域 -->
       <b-row class="form-area">
         <!-- 聯絡方式-->
-        <b-col class="col-3 contact">
+        <b-col class="col-4 contact">
           <div class="sub-title">
             <h3 class="bold">contact</h3>
           </div>
           <div class="content">
-            <p>Agent – AA Management
-              500 Terry Francine Street
-              San Francisco, CA 94158
-            </p>
+            <p>聯絡地址:桃園市桃園區力行路622號</p>
           </div>
           <div class="contact-method">
-            <p>Tel: 123-456-7890​<br>
-              info@mysite.com
+            <p>Tel: 0975119303​<br>
+              email: stuallen6311@gmail.com
             </p>
           </div>
           <!-- icon -->
@@ -34,7 +31,7 @@
           <Form></Form>
         </b-col>
       </b-row>
-    </b-col>
+    </b-row>
   </div>
 </template>
   

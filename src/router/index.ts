@@ -5,12 +5,12 @@ import project from "../views/project.vue"
 export const routes = [
     {
         path: '/',
-        name: '首頁',
+        name: 'home',
         component: home
     },
     {
         path: '/project',
-        name: 'ˊ專案經驗',
+        name: 'project',
         component: project
     },
     {

@@ -1,76 +1,144 @@
 <template>
   <div id="technology" class="custom-container">
-    <b-row>
-      <!-- 圖片 -->
-      <b-col class="bg-pic"> </b-col>
+    <b-row class="custom-row">
+      <!-- 文字介紹 -->
+      <b-col class="font-content col-5">
 
-      <!-- 標題 -->
-      <b-col class="title">
-        <!-- <div class="title-main">
-              <h1>ALLEN LI</h1>
-            </div>
-            <div class="title-subtitle">
-              <h3>Front-end Engineer</h3>
-            </div> -->
-            <Pie></Pie>
+        <b-row class="intrduce" v-show="isFrontEnd">
+          <div class="title">
+            <h2 class="bold">FRONT-END</h2>
+          </div>
+          <div class="content">
+            <p>在公司專案中我主要負責前端UI開發以及API的串接以及一些後端的修改，前端排版主要使用element
+              plus以及bootstrap，目前框架都是使用Vue為主，後端的部分有接觸一點Node.js以及java，因為目前待的是接案公司，所以在工作上經常接觸到各種不同的語言及工具，學習起來非常過癮。</p>
+          </div>
+        </b-row>
 
+        <b-row class="intrduce" v-show="!isFrontEnd">
+          <div class="title">
+            <h2 class="bold">BACK-END</h2>
+          </div>
+          <div class="content">
+            <p>在公司專案中我主要負責前端UI開發以及API的串接以及一些後端的修改，前端排版主要使用element
+              plus以及bootstrap，目前框架都是使用Vue為主，後端的部分有接觸一點Node.js以及java，因為目前待的是接案公司，所以在工作上經常接觸到各種不同的語言及工具，學習起來非常過癮。</p>
+          </div>
+        </b-row>
+
+        <!-- 按鈕 -->
+        <b-row class="button-group">
+          <Button label="Front-End" @btnOnClick="changePieData(true)"></Button>
+          <Button label="Back-End" @btnOnClick="changePieData(false)"></Button>
+        </b-row>
+      </b-col>
+
+      <b-col class="chart col-6">
+        <!-- 圖形 -->
+        <Pie :pieData="pieData" :pieLabel="pieLabel"></Pie>
       </b-col>
     </b-row>
   </div>
 </template>
     
-  <script lang="ts">
+<script lang="ts">
 import Component from "vue-class-component";
 import Vue from "vue";
 import Pie from "./tool/Pie.vue"
+import Button from "./tool/Button.vue";
+
+//定義chart中datasets架構
+interface pieDataItem {
+  backgroundColor: string[],
+  data: number[]
+}
 
 @Component({
-    components:{
-        Pie
-    }
+  components: {
+    Pie,
+    Button
+  }
 })
 export default class Technology extends Vue {
-  mainProps = {
-    center: true,
-    fluidGrow: true,
-  };
+  //前端資料
+  private frontEndData: pieDataItem[] = [
+    {
+      backgroundColor: ['#41B883', '#E46651', '#00D8FF','#0d6efd'],
+      data: [50, 20, 30,20]
+    }
+  ]
+  private frontEndLabel: string[] = ["Vue", "Bootstrap", "Element plus",'Jquery']
 
-  mounted() {
+  //後端資料
+  private backendData: pieDataItem[] = [
+    {
+      backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
+      data: [40, 40, 20]
+    }
+  ]
+  private backendLabel: string[] = ["Java", "Nodejs", "Php"]
 
+  public pieData: pieDataItem[] = this.frontEndData
+  public pieLabel: string[] = this.frontEndLabel
+  public isFrontEnd: boolean = true
+
+  //變更圖表資料內容
+  changePieData(isFront: boolean) {
+    this.isFrontEnd = isFront
+    if (isFront) {
+      this.pieData = this.frontEndData
+      this.pieLabel = this.frontEndLabel
+
+    } else {
+      this.pieData = this.backendData
+      this.pieLabel = this.backendLabel
+
+    }
   }
 }
 
 
 </script>
-  <style scoped>
-#technology .bg-pic {
-  /* background: url("https://picsum.photos/300/150/?image=43"); */
-}
-
-.title {
-  width: 80%;
+<style scoped>
+#technology {
   display: flex;
-  justify-content: space-around;
-  text-align: center;
-  flex-wrap: wrap;
-  position: absolute;
-  top: 45%;
-  left: 8%;
+  align-items: center;
+  background-color: var(--bs-black);
+  justify-content: space-between;
+}
+
+.font-content {
   margin: auto;
-  letter-spacing: 5px;
-  color: var(--bs-body-bg);
 }
 
-.title-main {
-  width: 100%;
+.intrduce {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
-.title-main h1 {
-  font-size: 170px;
-  font-weight: 900;
+.font-content .title {
+  /* padding: 30px  calc(var(--bs-gutter-x) * 0.5);; */
+  padding: 0;
 }
 
-.title-subtitle {
-  width: 100%;
+.font-content .title h2 {
+  font-size: 50px;
+}
+
+.font-content .content {
+  padding: 0;
+  line-height: 2;
+}
+
+.font-content .content p {
+  font-size: 20px;
+
+}
+
+.font-content .button-group {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 30px 0;
 }
 </style>
