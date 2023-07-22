@@ -1,6 +1,7 @@
 1.技術總表內容變更(可以的話加入切換動畫)
 2.banner換圖片(換成輪波圖)
-3.form輸入框檢核
+3.讓webpack打包出index.html
 4.iconList連結
 5.圓餅圖文字
+
 

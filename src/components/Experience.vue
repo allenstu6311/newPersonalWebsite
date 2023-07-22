@@ -98,7 +98,6 @@ export default class Experience extends Vue {
 
     public showModel: Boolean = false
 
-
     callModel(id: string) {
         switch (id) {
             case "ifrs17":

@@ -1,7 +1,12 @@
 <template>
   <b-input-group :prepend="label + ' :'">
-    <b-form-input v-model="inputValue" @change="sendValue" :class="{ errType: errorMsg }"
-      @focus="checkStatus"></b-form-input>
+    <b-form-input
+      v-model="inputValue"
+      @change="sendValue"
+      :class="{ errType: errorMsg }"
+      @focus="checkStatus('focus')"
+      @blur="checkStatus('blur')"
+    ></b-form-input>
     <div class="has-error">{{ errorMsg }}</div>
   </b-input-group>
 </template>
@@ -15,7 +20,7 @@ import { textChangeRangeIsUnchanged } from "typescript";
 @Component({
   props: {
     label: String,
-    type: String
+    type: String,
   },
 })
 export default class InputBox extends Vue {
@@ -24,39 +29,68 @@ export default class InputBox extends Vue {
 
   public inputValue: string = "";
   public errorMsg: string = "";
-  public checking: Boolean = false
+  public checking: Boolean = false;
 
   sendValue() {
     this.$emit("inputBoxOnChange", this.inputValue);
   }
 
+  //驗證輸入框
+  inputValueValidate() {
+    if (this.$props.type && !this.errorMsg && this.inputValue) {
+      return true;
+
+    }else if(!this.$props.type){
+      return true
+
+    }
+    return false;
+  }
+
+  //清空輸入框
   clearInput() {
     this.inputValue = "";
   }
 
-  checkStatus() {
-    this.checking = true
-    console.log(this.checking)
-  }
-
-  @Watch("$props.type", { immediate: true })
-  checkErrType(newVal: string) {
+  checkStatus(status: string) {
+    if (status == "focus") {
+      this.checking = true;
+      this.checkErrType(this.inputValue);
  
-      // if (!this.checking) return
-      console.log('test',this.checking)
-      switch (newVal) {
-        case "name":
-        this.$nextTick(() => {
-          if (!this.inputValue && this.checking) {
-            this.errorMsg = "必填值";
-          }
-        })
-      }
-
-
+    } else {
+      this.checking = false;
+      this.errorMsg = "";
+      this.checkErrType("");
+    }
   }
 
+  @Watch("inputValue", { immediate: true })
+  checkErrType(newVal: string) {
+    let emaillCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // stuallen6311@gmai.com
+    if (this.checking) {
+      switch (this.$props.type) {
+        case "name":
+          if (newVal == "") {
+            this.errorMsg = "必填值";
+          } else {
+            this.errorMsg = "";
+          }
+          break;
 
+        case "email":
+          if (newVal == "") {
+            this.errorMsg = "必填值";
+          } else if (!emaillCheck.test(this.inputValue)) {
+            this.errorMsg = "email格式錯誤";
+          } else {
+            this.errorMsg = "";
+          }
+          break;
+      }
+    }
+
+  }
 
   mounted() {
     this.clearInput();

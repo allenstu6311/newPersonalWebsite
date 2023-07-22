@@ -93,7 +93,6 @@ export default class PieComponent extends Vue {
     }
   }
 
-
   //創建圖表
   createChart() {
     const canvas = document.getElementById("chart") as HTMLCanvasElement;

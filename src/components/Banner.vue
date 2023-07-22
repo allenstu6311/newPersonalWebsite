@@ -21,24 +21,22 @@ import Component from "vue-class-component";
 import Vue from "vue";
 
 @Component
-export default class Banner extends Vue {
-
-}
+export default class Banner extends Vue {}
 </script>
 
 <style scoped>
 #banner .bg-pic {
-    background: url('https://picsum.photos/300/150/?image=41');
+  background: url("https://picsum.photos/300/150/?image=41");
 }
-#banner .bg-pic:before{
-    content: '';
-    width: 100%;
-    height: 100%;
-    background-color: var(--bs-secondary-color);
-    opacity: .6;
-    position: absolute;
-    top: 0;
-    left: 0;
+#banner .bg-pic:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--bs-secondary-color);
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 #banner .title {
   width: 80%;
@@ -47,7 +45,7 @@ export default class Banner extends Vue {
   text-align: center;
   flex-wrap: wrap;
   position: absolute;
-  top:45%;
+  top: 45%;
   left: 8%;
   margin: auto;
   letter-spacing: 5px;

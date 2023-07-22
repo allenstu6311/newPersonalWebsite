@@ -15,15 +15,17 @@
             label="Last Name *"
             @inputBoxOnChange="lastNameOnChange"
             ref="lastName"
+            type="name"
           ></input-box>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
           <input-box
-            label="Email"
+            label="Email *"
             @inputBoxOnChange="emailOnChange"
             ref="email"
+            type="email"
           ></input-box>
         </b-col>
         <b-col>
@@ -50,7 +52,15 @@
       </b-row>
     </b-form>
     <!-- 燈箱 -->
-    <b-modal id="my-modal" centered @ok="sendEmail" ok-title="送出" cancel-title="取消"> 確定送出? </b-modal>
+    <b-modal
+      id="my-modal"
+      centered
+      @ok="sendEmail"
+      ok-title="送出"
+      cancel-title="取消"
+    >
+      確定送出?
+    </b-modal>
     <!-- 送出訊息 -->
     <div>
       <b-toast id="form-toast" :variant="sendStatus" solid>
@@ -102,6 +112,7 @@ export default class Form extends Vue {
   public SharedMixin = new SharedMixin();
   public sendResult: string = "";
   public sendStatus: string = "";
+  private validateArray: any[] = [];
 
   /*更新輸入框*/
   firstNameOnChange(value: string) {
@@ -125,45 +136,76 @@ export default class Form extends Vue {
   }
   /*更新輸入框*/
 
+  mounted() {
+    this.validateArray = [
+      this.$refs.firstName,
+      this.$refs.lastName,
+      this.$refs.email,
+    ];
+  }
+
   //寄信
   sendEmail() {
-    let params = {
-      firstName: this.form.firstName,
-      lastName: this.form.lastName,
-      subject: this.form.subject,
-      email: this.form.email,
-      message: this.form.message,
-    };
-    emailjs
-      .send(
-        "service_jve14rf",
-        "template_rn4wtkf",
-        {
-          firstName: this.form.firstName,
-          lastName: this.form.lastName,
-          subject: this.form.subject,
-          email: this.form.email,
-          message: this.form.message,
-        },
-        "7S1Tiqx9G5PJh-r9P"
-      )
-      .then(() => {
-        // 觸發訊息
-        this.sendResult = "送出成功";
-        this.sendStatus = "warning";
-        this.$bvToast.show("form-toast");
-        //清空輸入框訊息
-        this.SharedMixin.getChildComponent(this.$refs.firstName, "clearInput");
-        this.SharedMixin.getChildComponent(this.$refs.lastName, "clearInput");
-        this.SharedMixin.getChildComponent(this.$refs.email, "clearInput");
-        this.SharedMixin.getChildComponent(this.$refs.subject, "clearInput");
-        this.SharedMixin.getChildComponent(this.$refs.message, "clearInput");
-      })
-      .catch(() => {
-        this.sendResult = "送出失敗";
-        this.sendStatus = "danger";
-        this.$bvToast.show("form-toast");
-      });
+    //驗證欄位
+    this.$nextTick(() => {
+      let result: boolean | undefined = false;
+      for (let i = 0; i < this.validateArray.length; i++) {
+        result = this.SharedMixin.getChildComponent(
+          this.validateArray[i],
+          "inputValueValidate"
+        );
+
+        if (!result) {
+          console.log("test", result);
+          this.validateFailHanfle();
+          return;
+        }
+      }
+
+      emailjs
+        .send(
+          "service_jve14rf",
+          "template_rn4wtkf",
+          {
+            firstName: this.form.firstName,
+            lastName: this.form.lastName,
+            subject: this.form.subject,
+            email: this.form.email,
+            message: this.form.message,
+          },
+          "7S1Tiqx9G5PJh-r9P"
+        )
+        .then(() => {
+          console.log('success')
+          // 觸發訊息
+          this.sendResult = "送出成功";
+          this.sendStatus = "warning";
+          this.$bvToast.show("form-toast");
+          //清空輸入框訊息
+          this.SharedMixin.getChildComponent(this.$refs.firstName, "clearInput");
+          this.SharedMixin.getChildComponent(this.$refs.lastName, "clearInput");
+          this.SharedMixin.getChildComponent(this.$refs.email, "clearInput");
+          this.SharedMixin.getChildComponent(this.$refs.subject, "clearInput");
+          this.SharedMixin.getChildComponent(this.$refs.message, "clearInput");
+        })
+        .catch((err) => {
+          console.log('fail',err)
+          this.sendResult = "送出失敗";
+          this.sendStatus = "danger";
+          this.$bvToast.show("form-toast");
+        });
+    });
+  }
+
+  //驗證失敗呼叫子層檢查狀態
+  validateFailHanfle() {
+    for (let i = 0; i < this.validateArray.length; i++) {
+      console.log(i);
+      this.SharedMixin.getChildComponent(
+        this.validateArray[i],
+        "checkInpustStatus"
+      );
+    }
   }
 }
 </script>

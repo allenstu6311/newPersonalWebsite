@@ -1,5 +1,5 @@
 <template>
-  <b-form-group :label="label + ':'" label-for="textarea-lazy" class="mt-3">
+  <b-form-group :label="label + ':'" label-for="textarea-lazy">
     <b-form-textarea
       id="textarea-lazy"
       class="textarea-content"

@@ -34,7 +34,7 @@ export default class home extends Vue {
   public test: string = "test";
 
   routeInfo(route: string) {
-    console.log("emit", route);
+    // console.log("emit", route);
   }
 }
 </script>
