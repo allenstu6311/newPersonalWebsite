@@ -118,6 +118,12 @@ root,
     --bs-form-invalid-border-color: #dc3545;
 }
 
+* {
+    list-style: none;
+}
+body{
+    background-color: var(--bs-black);
+}
 /* 容器 */
 body .custom-container {
     width: 100%;
@@ -160,7 +166,8 @@ body .bold {
     display: flex;
     align-items: center;
 }
-.close:hover{
+
+.close:hover {
     color: #0a58ca !important;
 }
 
@@ -187,7 +194,7 @@ body .bold {
 .swiper-pagination {
     display: flex;
     color: #fff;
-    left: 48%;
+    left: 47%;
     position: absolute;
 }
 
@@ -197,7 +204,77 @@ body .bold {
 }
 
 /* 錯誤提示 */
-.has-error{
+.has-error {
     color: var(--bs-danger);
     min-height: 25px;
+}
+
+/* nav */
+.nav {
+    --bs-nav-link-padding-x: 2rem !important;
+    --bs-nav-link-padding-y: 1.5rem !important;
+    --bs-nav-link-font-weight: ;
+    --bs-nav-link-color: var(--bs-black);
+    --bs-nav-link-hover-color: var(--bs-black);
+    --bs-nav-link-disabled-color: var(--bs-secondary-color);
+    margin: auto;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    --bs-nav-link-color: var(--bs-black);
+    color: var(--bs-black);
+    text-decoration: none;
+    background: none;
+    border: 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out;
+}
+
+/* 其他 */
+.dNone {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    /* 容器 */
+    body .custom-container {
+        width: 100%;
+        min-height: 100vh;
+        height: 100%;
+        position: relative;
+    }
+
+    body .custom-row {
+        max-width: 1300px;
+        margin: auto;
+        flex-wrap: wrap;
+    }
+
+    .swiper-pagination{
+        left: 40%;
+    }
+
+    #bv-modal-resume .modal-content {
+        width: 90% !important;
+        height: 90vh;
+        right: -5%;
+        top: 20px !important;
+    }
+
+    body .tooltip.b-tooltip {
+        display: none;
+    }
 }

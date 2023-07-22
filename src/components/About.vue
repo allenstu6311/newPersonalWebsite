@@ -2,14 +2,14 @@
   <div id="about">
     <b-row class="custom-row">
       <!-- 個人照片 -->
-      <b-col class="pic">
+      <b-col class="pic" sm="5">
         <b-img :src="picPath" rounded="circle" fluid alt="Responsive image"></b-img>
       </b-col>
       <b-col class="content">
         <b-col class="title">
           <h1 class="bold">ABOUT ME !</h1>
         </b-col>
-        <b-col class="text">
+        <b-col class="text" sm="5">
           <p>
             我是一位擁有棒球背景的前端工程師。學生時期，我每天在球場上奔馳揮灑汗水。雖然未能打進職棒，但這段時間磨練了我不怕苦的精神和堅持到底的毅力。畢業後，我投入體能教練的工作，協助學生達到更健康的身體狀態。然而，由於疫情以及工作性質的關係，我開始感受到這份工作的不穩定性，對於行業前景也產生了擔憂。
           </p>
@@ -89,7 +89,6 @@ export default class About extends Vue {
 #about {
   background-color: var(--bs-teal);
 }
-
 #about .pic {
   padding: 20px 0px;
   display: flex;
@@ -111,7 +110,6 @@ export default class About extends Vue {
   letter-spacing: 3px;
   font-size: 50px;
 }
-
 .content .text {
   width: 80%;
   margin: auto;
@@ -125,9 +123,14 @@ export default class About extends Vue {
   padding-bottom: 30px;
   margin: auto;
 }
-
 .tooltip {
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .button{
+    text-align: center;
+  }
 }
 </style>
 

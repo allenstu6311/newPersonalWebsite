@@ -10,7 +10,7 @@
       <!-- 表單區域 -->
       <b-row class="form-area">
         <!-- 聯絡方式-->
-        <b-col class="col-4 contact">
+        <b-col class="contact" sm="5" log="4">
           <div class="sub-title">
             <h3 class="bold">contact</h3>
           </div>
@@ -18,7 +18,8 @@
             <p>聯絡地址:桃園市桃園區力行路622號</p>
           </div>
           <div class="contact-method">
-            <p>Tel: 0975119303​<br>
+            <p>
+              Tel: 0975119303​<br />
               email: stuallen6311@gmail.com
             </p>
           </div>
@@ -27,7 +28,7 @@
         </b-col>
 
         <!-- 聯繫表單 -->
-        <b-col class="col-7">
+        <b-col sm="5" lg="7">
           <Form></Form>
         </b-col>
       </b-row>
@@ -46,53 +47,56 @@ import Form from "./tool/Form.vue";
   components: {
     Button,
     IconList,
-    Form
+    Form,
   },
 })
-export default class Footer extends Vue {
-
-}
+export default class Footer extends Vue {}
 </script>
 <style scoped>
 #footer {
   background-color: var(--bs-teal);
 }
-
-#footer>.custom-row {
-  padding: 100px 0 20px 0;
-}
-
 #footer .title {
   width: 100%;
   text-align: center;
-  margin: 40px auto;
+  margin: 80px auto 40px 0;
 }
-
 .sub-title {
   letter-spacing: 3px;
   padding: 20px 0;
 }
-
 .sub-title h3 {
   font-size: 35px;
 }
-
 .title .col {
   padding: 0;
 }
-
 #footer .title h2 {
   border: 10px solid var(--bs-black);
   padding: 30px;
   font-size: 40px;
 }
-
 .contact .content,
 .contact .contact-method {
   line-height: 1.5;
 }
-
 .form-area {
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}</style>
+  padding-right:0
+}
+
+@media screen and (max-width: 768px) {
+  #footer {
+    padding-bottom: 50px;
+  }
+  #footer .title {
+    width: 100%;
+    text-align: center;
+    margin: 20px auto 20px 0;
+  }
+  .contact {
+    padding-left: 50px;
+    margin-bottom: 50px;
+  }
+  
+}
+</style>

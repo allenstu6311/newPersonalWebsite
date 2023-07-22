@@ -1,22 +1,106 @@
 <template>
-  <div class="header" ref="headerHeight">
-    <b-nav class="custom-row">
-      <icon-list></icon-list>
-      <div class="d-flex">
-        <b-nav-item @click="scrollTo('#banner')" :class="{ active: active == '#banner' }">Home</b-nav-item>
-        <b-nav-item @click="scrollTo('#about')" :class="{ active: active == '#about' }">About</b-nav-item>
-        <b-nav-item @click="scrollTo('#experince')" :class="{ active: active == '#experince' }">experince</b-nav-item>
-        <b-nav-item @click="scrollTo('#technology')" :class="{ active: active == '#technology' }">Technology</b-nav-item>
-        <b-nav-item @click="scrollTo('#footer')" :class="{ active: active == '#footer' }">Contact</b-nav-item>
-        <!-- <b-nav-item to="/project" :class="{ active: active == '#project' }">Project</b-nav-item> -->
+  <div class="">
+    <div class="header lg" ref="headerHeight">
+      <b-nav class="custom-row">
+        <icon-list></icon-list>
+        <div class="d-flex">
+          <b-nav-item
+            @click="scrollTo('#banner')"
+            :class="{ active: active == '#banner' }"
+            >Home</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#about')"
+            :class="{ active: active == '#about' }"
+            >About</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#experince')"
+            :class="{ active: active == '#experince' }"
+            >experince</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#technology')"
+            :class="{ active: active == '#technology' }"
+            >Technology</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#footer')"
+            :class="{ active: active == '#footer' }"
+            >Contact</b-nav-item
+          >
+        </div>
+      </b-nav>
+    </div>
+
+    <!-- 手機板sidebar -->
+    <div class="header sm" ref="headerHeight">
+      <div class="phone-header">
+        <icon-list></icon-list>
+        <ul class="control-sidebar" v-b-toggle.sidebar-right>
+          <li :class="{ left: siderBarShowed }"></li>
+          <li :class="{ dNone: siderBarShowed }"></li>
+          <li :class="{ right: siderBarShowed }"></li>
+        </ul>
       </div>
-    </b-nav>
+
+      <!-- sidebar -->
+      <b-sidebar
+        id="sidebar-right"
+        aria-labelledby="sidebar-no-header-title"
+        shadow
+        right
+        backdrop
+        @shown="siderBarShowed=true"
+        @hidden="siderBarShowed=false"
+      >
+        <template>
+          <div class="pt-5 sidebar-content">
+            <!-- <icon-list></icon-list> -->
+            <nav class="sidebar-url">
+              <b-nav vertical>
+                <b-nav-item
+                  @click="scrollTo('#banner')"
+                  :class="{ active: active == '#banner' }"
+                  v-b-toggle.sidebar-right
+                  >Home</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#about')"
+                  :class="{ active: active == '#about' }"
+                  v-b-toggle.sidebar-right
+                  >About</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#experince')"
+                  :class="{ active: active == '#experince' }"
+                  v-b-toggle.sidebar-right
+                  >experince</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#technology')"
+                  :class="{ active: active == '#technology' }"
+                  v-b-toggle.sidebar-right
+                  >Technology</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#footer')"
+                  :class="{ active: active == '#footer' }"
+                  v-b-toggle.sidebar-right
+                  >Contact</b-nav-item
+                >
+              </b-nav>
+            </nav>
+          </div>
+        </template>
+      </b-sidebar>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Component from "vue-class-component";
-import { Prop,Watch } from "vue-property-decorator";
+import { Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 import { routes } from "../router/index";
 import IconList from "./tool/IconList.vue";
@@ -35,6 +119,7 @@ export default class Header extends Vue {
   public scrollY: number = 0;
   public active: string = "";
   public isCalculating: boolean = false;
+  public siderBarShowed: boolean = false;
 
   //監聽route
   // @Watch("$route", { deep: true })
@@ -46,17 +131,18 @@ export default class Header extends Vue {
 
   // 移動到目標區域
   scrollTo(target: string) {
-    if (this.$route.path != '/') {
+    if (this.$route.path != "/") {
       this.$router.push("/");
-      this.getScrollHeight()
+      this.getScrollHeight();
     }
 
-    
     this.$nextTick(() => {
-      console.log(this.$route.name)
+      this.siderBarShowed = false;
+      // this.$refs.sidebarRight.toggle()
       const element: any = document.querySelector(target);
       if (element) {
         const offset = this.headerHeightInfo; // 調整的像素距離
+        console.log("offset",offset)
         window.scrollTo({
           top: element.offsetTop - offset,
           behavior: "smooth", // 捲動的動畫效果
@@ -66,7 +152,6 @@ export default class Header extends Vue {
   }
   // 取得滾輪當前位置
   getScrollHeight() {
-
     if (this.$route.path != "/") {
       this.active = "#project";
     } else {
@@ -113,38 +198,6 @@ export default class Header extends Vue {
   box-shadow: 0px 0px 5px 2px var(--bs-dark-border-subtle);
 }
 
-.nav {
-  --bs-nav-link-padding-x: 2rem !important;
-  --bs-nav-link-padding-y: 1.5rem !important;
-  --bs-nav-link-font-weight: ;
-  --bs-nav-link-color: var(--bs-black);
-  --bs-nav-link-hover-color: var(--bs-black);
-  --bs-nav-link-disabled-color: var(--bs-secondary-color);
-  margin: auto;
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-link {
-  display: block;
-  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-  font-size: var(--bs-nav-link-font-size);
-  font-weight: var(--bs-nav-link-font-weight);
-  --bs-nav-link-color: var(--bs-black);
-  color: var(--bs-black);
-  text-decoration: none;
-  background: none;
-  border: 0;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out;
-}
-
 .active a {
   color: var(--bs-link-hover-color) !important;
 }
@@ -152,5 +205,78 @@ export default class Header extends Vue {
 .nav-link:hover,
 .nav-link:focus {
   --bs-nav-link-hover-color: var(--bs-black);
+}
+.header.sm {
+  display: none;
+}
+
+/* 手機板 */
+@media screen and (max-width: 768px) {
+  .header.lg {
+    display: none;
+  }
+  /* siderBar調整 */
+  .header.sm {
+    display: block;
+    padding: 0 15px;
+  }
+  .phone-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 75px;
+  }
+  .control-sidebar {
+    width: 7%;
+    height: 100%;
+    padding-left: 0px;
+    margin-bottom: 0;
+    margin: 20px 0;
+    z-index: 10000;
+    position: relative;
+  }
+  .control-sidebar li {
+    height: 3px;
+    background-color: var(--bs-secondary);
+    margin: 5px 0;
+    transform: rotate(0deg);
+    transition: 0.3s;
+  }
+
+  li.left {
+    position: relative;
+    transform: rotate(45deg);
+    bottom: -5px;
+    background-color: var(--bs-secondary);
+    transition: 0.3s;
+  }
+
+  li.right {
+    position: relative;
+    transform: rotate(-45deg);
+    background-color: var(--bs-secondary);
+    bottom: 3px;
+    transition: 0.3s;
+   }
+
+  .sidebar-content {
+    text-align: right;
+  }
+  .sidebar-content .nav-item {
+    width: 70%;
+    text-align: left;
+    border-bottom: 1px solid var(--bs-secondary);
+  }
+  .nav-link {
+    padding-left: 10px;
+  }
+  /* sidebar url */
+  .sidebar-url {
+    margin-top: 50px;
+  }
+  /* 把叉叉用不見 */
+  .b-sidebar-header .close {
+    display: none;
+  }
 }
 </style>

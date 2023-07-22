@@ -1,8 +1,23 @@
 <template>
   <div class="mb-0 icon-list">
-    <b-icon icon="facebook" variant="dark" class="icon"></b-icon>
-    <b-icon icon="instagram" variant="dark" class="icon"></b-icon>
-    <b-icon icon="github" variant="dark" class="icon"></b-icon>
+    <a
+      href="https://www.facebook.com/profile.php?id=100004274040281"
+      target="_blank"
+    >
+      <b-icon icon="facebook" variant="dark" class="icon"></b-icon>
+    </a>
+    <a
+      href="https://www.instagram.com/allenstu6311/"
+      target="_blank"
+    >
+      <b-icon icon="instagram" variant="dark" class="icon"></b-icon>
+    </a>
+    <a
+      href="https://github.com/"
+      target="_blank"
+    >
+      <b-icon icon="github" variant="dark" class="icon"></b-icon>
+    </a>
   </div>
 </template>
 
