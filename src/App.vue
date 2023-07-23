@@ -32,9 +32,5 @@ export default class App extends Vue {
 }
 </script>
 
-<style>
-#app {
-  /* overflow: hidden; */
-}
-</style>
+<style></style>
 

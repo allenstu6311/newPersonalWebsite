@@ -1,6 +1,6 @@
 <template>
   <!-- class="custom-container" -->
-  <div id="footer" class="custom-container">
+  <div id="footer">
     <b-row class="custom-row">
       <!-- 標題 -->
       <b-row class="title">
@@ -56,7 +56,7 @@ export default class Footer extends Vue {}
 <style scoped>
 #footer {
   background-color: var(--bs-teal);
-  /* padding-bottom: 150px; */
+  padding-bottom: 150px;
 }
 #footer .title {
   width: 100%;
@@ -87,6 +87,9 @@ export default class Footer extends Vue {}
 }
 
 @media screen and (max-width: 990px) {
+  #footer{
+    padding-bottom: 50px;
+  }
   #footer .title {
     width: 100%;
     text-align: center;

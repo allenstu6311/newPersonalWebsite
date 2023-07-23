@@ -155,13 +155,12 @@ export default class Header extends Vue {
     if (this.$route.path != "/") {
       this.active = "#project";
     } else {
-      this.scrollY =
-        document.documentElement.scrollTop + this.headerHeightInfo + 100;
+      this.scrollY = document.documentElement.scrollTop + this.headerHeightInfo;
 
       this.getComponentHeight("#banner");
       this.getComponentHeight("#about");
-      this.getComponentHeight("#technology");
       this.getComponentHeight("#experince");
+      this.getComponentHeight("#technology");
       this.getComponentHeight("#footer");
     }
   }
@@ -173,7 +172,9 @@ export default class Header extends Vue {
       const targetRect = targetElement.getBoundingClientRect();
       const top = targetRect.top + window.pageYOffset;
       const bottom = targetRect.bottom + window.pageYOffset;
-      const isInRange = this.scrollY > top && this.scrollY < bottom;
+      // console.log("scroll",target +":"+ top +"/" + this.scrollY + "/" + bottom);
+
+      const isInRange = this.scrollY > top -300  && this.scrollY < bottom ;
 
       if (isInRange) {
         this.active = target;
@@ -184,8 +185,12 @@ export default class Header extends Vue {
   mounted() {
     const headerHeightElementLg = this.$refs.headerHeightLg as HTMLElement;
     const headerHeightElementSm = this.$refs.headerHeightSm as HTMLElement;
-    this.headerHeightInfo = headerHeightElementLg.clientHeight>1? headerHeightElementLg.clientHeight: headerHeightElementSm.clientHeight;
-    
+    // 取得各響應式header的高度
+    this.headerHeightInfo =
+      headerHeightElementLg.clientHeight > 1
+        ? headerHeightElementLg.clientHeight
+        : headerHeightElementSm.clientHeight;
+
     window.addEventListener("load", this.getScrollHeight);
     window.addEventListener("scroll", this.getScrollHeight);
   }
