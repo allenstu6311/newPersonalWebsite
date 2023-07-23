@@ -15,7 +15,7 @@
         <b-col class="title">
           <h1 class="bold">ABOUT ME !</h1>
         </b-col>
-        <b-col class="text">  
+        <b-col class="text">
           <p>
             我是一位擁有棒球背景的前端工程師。學生時期，我每天在球場上奔馳揮灑汗水。雖然未能打進職棒，但這段時間磨練了我不怕苦的精神和堅持到底的毅力。畢業後，我投入體能教練的工作，協助學生達到更健康的身體狀態。然而，由於疫情以及工作性質的關係，我開始感受到這份工作的不穩定性，對於行業前景也產生了擔憂。
           </p>
@@ -35,7 +35,7 @@
             target="tooltip-target-1"
             triggers="hover"
             placement="left"
-            v-if="1==2"
+            v-if="hideToolip == 'show'"
           >
             <embed
               :src="pdfPath"
@@ -53,8 +53,8 @@
       ok-title="下載"
       cancel-title="關閉"
       @ok="openCheckModal"
-      @shown="hideToolip=true"
-      @hidden="hideToolip=false"
+      @shown="controlTooltip('show')"
+      @hidden="controlTooltip('')"
     >
       <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
     </b-modal>
@@ -96,11 +96,19 @@ export default class About extends Vue {
   public picPath: any = personalphoto;
   public sendResult: string = "";
   public sendStatus: string = "";
-  public hideToolip :boolean = false;
+  public hideToolip: string = '';
 
   openCheckModal(e: any) {
     e.preventDefault();
     this.$bvModal.show("bv-modal-check");
+  }
+
+  controlTooltip(status:string){
+    if(status == 'show'){
+      this.hideToolip = 'hide'
+    }else{
+      this.hideToolip = 'show'
+    }
   }
 
   download() {
@@ -161,7 +169,7 @@ export default class About extends Vue {
 }
 
 @media screen and (max-width: 990px) {
-  #about  .button {
+  #about .button {
     text-align: center;
   }
   .content .title h1 {
