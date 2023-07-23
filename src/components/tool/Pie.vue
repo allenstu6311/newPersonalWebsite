@@ -8,7 +8,6 @@ import { Pie } from "vue-chartjs";
 import { Prop, Watch } from "vue-property-decorator";
 import Component from "vue-class-component";
 import Vue from "vue";
-import { ChartConfiguration } from 'chart.js';
 
 import {
   Chart as ChartJS,
@@ -29,28 +28,29 @@ ChartJS.register(
   BarElement,
   CategoryScale,
   LinearScale,
-  ArcElement,
+  ArcElement
 );
 
 //定義chart中datasets架構
 interface pieDataItem {
-  backgroundColor: string[],
-  data: number[]
+  backgroundColor: string[];
+  data: number[];
 }
 
 @Component({
   components: {
-    Pie
-  }
+    Pie,
+  },
 })
 export default class PieComponent extends Vue {
-  @Prop(Array) pieData !: pieDataItem[]
-  @Prop(Array) pieLabel !: string[]
+  @Prop(Array) pieData!: pieDataItem[];
+  @Prop(Array) pieLabel!: string[];
 
   private chart: any = null; //chart圖表
-  public chartHasShow :boolean = false
+  public chartHasShow: boolean = false;
 
   mounted() {
+    let self = this;
     const options = {
       threshold: 0.5, // 進入可視區域超過50%時觸發
     };
@@ -62,12 +62,12 @@ export default class PieComponent extends Vue {
 
   //進入可是範圍才執行畫布渲染
   handleIntersection(entries: IntersectionObserverEntry[]) {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting && !this.chartHasShow) {
         // 進入可視區域，可以在這裡執行相應的動作
         this.createChart();
-        this.chartHasShow = true
-      } 
+        this.chartHasShow = true;
+      }
     });
   }
 
@@ -76,9 +76,9 @@ export default class PieComponent extends Vue {
   onWatchDataChanded(newVal: pieDataItem[], oldVal: pieDataItem[]) {
     if (newVal != oldVal && this.chartHasShow) {
       this.$nextTick(() => {
-        this.chart.data.datasets = newVal
-        this.chart.update()
-      })
+        this.chart.data.datasets = newVal;
+        this.chart.update();
+      });
     }
   }
 
@@ -87,16 +87,16 @@ export default class PieComponent extends Vue {
   onWatchLabelChanded(newVal: string[], oldVal: string[]) {
     if (newVal != oldVal && this.chartHasShow) {
       this.$nextTick(() => {
-        this.chart.data.labels = newVal
-        this.chart.update()
-      })
+        this.chart.data.labels = newVal;
+        this.chart.update();
+      });
     }
   }
 
   //創建圖表
   createChart() {
     const canvas = document.getElementById("chart") as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     this.chart = new Chart(ctx, {
       type: "pie",
       data: {
@@ -105,7 +105,7 @@ export default class PieComponent extends Vue {
       },
       options: {
         responsive: true,
-        // maintainAspectRatio: false,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             labels: {
@@ -113,13 +113,13 @@ export default class PieComponent extends Vue {
               boxWidth: 60,
               padding: 10,
               font: {
-                size: 17
+                size: 17,
               },
             },
           },
           title: {
             display: true,
-            text: '技術總表',
+            text: "技術總表",
             color: "#fff",
             padding: {
               top: 10,
@@ -128,16 +128,23 @@ export default class PieComponent extends Vue {
             font: {
               size: 25,
             },
-          }
-        }
+          },
+        },
       },
     });
   }
 }
-
 </script>
 <style>
 #chart {
-  width: 100%;
+  width: 100% !important;
+  height: 100%;
+  margin: auto;
+}
+
+@media screen and (max-width: 990px) {
+  #chart {
+    width: 80% !important;
+  }
 }
 </style>

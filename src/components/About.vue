@@ -2,14 +2,20 @@
   <div id="about">
     <b-row class="custom-row">
       <!-- 個人照片 -->
-      <b-col class="pic" sm="5">
-        <b-img :src="picPath" rounded="circle" fluid alt="Responsive image"></b-img>
+      <b-col class="pic" sm="12" md="12" lg="6">
+        <b-img
+          :src="picPath"
+          rounded="circle"
+          fluid
+          alt="Responsive image"
+        ></b-img>
       </b-col>
-      <b-col class="content">
+      <!-- 文字介紹 -->
+      <b-col class="content" sm="12" md="12" lg="6">
         <b-col class="title">
           <h1 class="bold">ABOUT ME !</h1>
         </b-col>
-        <b-col class="text" sm="5">
+        <b-col class="text">  
           <p>
             我是一位擁有棒球背景的前端工程師。學生時期，我每天在球場上奔馳揮灑汗水。雖然未能打進職棒，但這段時間磨練了我不怕苦的精神和堅持到底的毅力。畢業後，我投入體能教練的工作，協助學生達到更健康的身體狀態。然而，由於疫情以及工作性質的關係，我開始感受到這份工作的不穩定性，對於行業前景也產生了擔憂。
           </p>
@@ -19,20 +25,48 @@
         </b-col>
         <!-- 按鈕 -->
         <b-col class="button">
-          <Button label="查看簡歷" id="tooltip-target-1" @btnOnClick="$bvModal.show('bv-modal-resume')"></Button>
+          <Button
+            label="查看簡歷"
+            id="tooltip-target-1"
+            @btnOnClick="$bvModal.show('bv-modal-resume')"
+          ></Button>
           <!-- tip -->
-          <b-tooltip target="tooltip-target-1" triggers="hover" placement="left">
-            <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
+          <b-tooltip
+            target="tooltip-target-1"
+            triggers="hover"
+            placement="left"
+            v-if="1==2"
+          >
+            <embed
+              :src="pdfPath"
+              type="application/pdf"
+              width="100%"
+              height="100%"
+            />
           </b-tooltip>
         </b-col>
       </b-col>
     </b-row>
     <!-- 履歷燈箱 -->
-    <b-modal id="bv-modal-resume" ok-title="下載" cancel-title="關閉" @ok="openCheckModal">
+    <b-modal
+      id="bv-modal-resume"
+      ok-title="下載"
+      cancel-title="關閉"
+      @ok="openCheckModal"
+      @shown="hideToolip=true"
+      @hidden="hideToolip=false"
+    >
       <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
     </b-modal>
     <!-- 確認燈箱 -->
-    <b-modal id="bv-modal-check" centered ok-title="確定" cancel-title="取消" @ok="download">確定下載?</b-modal>
+    <b-modal
+      id="bv-modal-check"
+      centered
+      ok-title="確定"
+      cancel-title="取消"
+      @ok="download"
+      >確定下載?</b-modal
+    >
     <!-- 通知訊息 -->
     <b-toast id="download-toast" :variant="sendStatus" solid>
       <template #toast-title>
@@ -59,29 +93,28 @@ import { saveAs } from "file-saver";
 })
 export default class About extends Vue {
   public pdfPath: string = pdfData;
-  public picPath: any = personalphoto
+  public picPath: any = personalphoto;
   public sendResult: string = "";
   public sendStatus: string = "";
+  public hideToolip :boolean = false;
 
-  openCheckModal(e:any){
+  openCheckModal(e: any) {
     e.preventDefault();
-    this.$bvModal.show('bv-modal-check')
+    this.$bvModal.show("bv-modal-check");
   }
 
   download() {
     try {
       // 下載檔案
-      saveAs(this.pdfPath, "履歷.pdf")
+      saveAs(this.pdfPath, "履歷.pdf");
       this.sendResult = "下載成功";
       this.sendStatus = "warning";
       this.$bvToast.show("download-toast");
-
     } catch (err) {
       this.sendResult = "下載失敗";
       this.sendStatus = "danger";
       this.$bvToast.show("download-toast");
     }
-
   }
 }
 </script>
@@ -127,9 +160,12 @@ export default class About extends Vue {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .button{
+@media screen and (max-width: 990px) {
+  #about  .button {
     text-align: center;
+  }
+  .content .title h1 {
+    font-size: 40px;
   }
 }
 </style>

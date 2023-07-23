@@ -2,7 +2,7 @@
   <div id="technology" class="custom-container">
     <b-row class="custom-row">
       <!-- 文字介紹 -->
-      <b-col class="font-content" lg="5" sm="6">
+      <b-col class="font-content" lg="5" sm="12">
         <b-row class="intrduce" v-show="isFrontEnd">
           <div class="title">
             <h2 class="bold">FRONT-END</h2>
@@ -34,7 +34,7 @@
         </b-row>
       </b-col>
 
-      <b-col class="chart" lg="6" sm="5">
+      <b-col class="chart" lg="6" sm="12">
         <!-- 圖形 -->
         <Pie :pieData="pieData" :pieLabel="pieLabel"></Pie>
       </b-col>
@@ -139,8 +139,7 @@ export default class Technology extends Vue {
   justify-content: space-between;
   padding: 30px 0;
 }
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990px) {
   .font-content .title {
     text-align: center;
     margin-bottom: 10px;
@@ -154,8 +153,10 @@ export default class Technology extends Vue {
   }
   .font-content .button-group {
     padding: 30px 10px;
+    justify-content: space-around;
   }
   .chart{
+    width: 100%;
     padding-bottom: 30px;
   }
 }

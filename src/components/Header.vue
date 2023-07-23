@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="header lg" ref="headerHeight">
+    <div class="header lg" ref="headerHeightLg">
       <b-nav class="custom-row">
         <icon-list></icon-list>
         <div class="d-flex">
@@ -34,7 +34,7 @@
     </div>
 
     <!-- 手機板sidebar -->
-    <div class="header sm" ref="headerHeight">
+    <div class="header sm" ref="headerHeightSm">
       <div class="phone-header">
         <icon-list></icon-list>
         <ul class="control-sidebar" v-b-toggle.sidebar-right>
@@ -51,8 +51,8 @@
         shadow
         right
         backdrop
-        @shown="siderBarShowed=true"
-        @hidden="siderBarShowed=false"
+        @shown="siderBarShowed = true"
+        @hidden="siderBarShowed = false"
       >
         <template>
           <div class="pt-5 sidebar-content">
@@ -142,7 +142,7 @@ export default class Header extends Vue {
       const element: any = document.querySelector(target);
       if (element) {
         const offset = this.headerHeightInfo; // 調整的像素距離
-        console.log("offset",offset)
+        console.log("offset", offset);
         window.scrollTo({
           top: element.offsetTop - offset,
           behavior: "smooth", // 捲動的動畫效果
@@ -157,6 +157,7 @@ export default class Header extends Vue {
     } else {
       this.scrollY =
         document.documentElement.scrollTop + this.headerHeightInfo + 100;
+
       this.getComponentHeight("#banner");
       this.getComponentHeight("#about");
       this.getComponentHeight("#technology");
@@ -181,8 +182,10 @@ export default class Header extends Vue {
   }
 
   mounted() {
-    const headerHeightElement = this.$refs.headerHeight as HTMLElement;
-    this.headerHeightInfo = headerHeightElement.clientHeight;
+    const headerHeightElementLg = this.$refs.headerHeightLg as HTMLElement;
+    const headerHeightElementSm = this.$refs.headerHeightSm as HTMLElement;
+    this.headerHeightInfo = headerHeightElementLg.clientHeight>1? headerHeightElementLg.clientHeight: headerHeightElementSm.clientHeight;
+    
     window.addEventListener("load", this.getScrollHeight);
     window.addEventListener("scroll", this.getScrollHeight);
   }
@@ -209,6 +212,9 @@ export default class Header extends Vue {
 .header.sm {
   display: none;
 }
+.phone-header {
+  min-height: 75px;
+}
 
 /* 手機板 */
 @media screen and (max-width: 768px) {
@@ -224,10 +230,9 @@ export default class Header extends Vue {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 75px;
   }
   .control-sidebar {
-    width: 7%;
+    width: 30px;
     height: 100%;
     padding-left: 0px;
     margin-bottom: 0;
@@ -257,7 +262,7 @@ export default class Header extends Vue {
     background-color: var(--bs-secondary);
     bottom: 3px;
     transition: 0.3s;
-   }
+  }
 
   .sidebar-content {
     text-align: right;

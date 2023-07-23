@@ -1,5 +1,5 @@
 <template>
-    <b-modal :id="`modal-${modelId}`" centered  size="lg"  :title="content.title" @hide="clearId">  
+    <b-modal :id="`modal-${modelId}`" centered  size="lg"  :title="content.title" @hide="clearId" ok-only ok-title="關閉" title-class="bold">  
         <b-row>
             <b-col>
                 <b-img :src="picPath"></b-img>

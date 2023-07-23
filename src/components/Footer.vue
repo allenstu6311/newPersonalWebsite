@@ -1,4 +1,5 @@
 <template>
+  <!-- class="custom-container" -->
   <div id="footer" class="custom-container">
     <b-row class="custom-row">
       <!-- 標題 -->
@@ -10,7 +11,7 @@
       <!-- 表單區域 -->
       <b-row class="form-area">
         <!-- 聯絡方式-->
-        <b-col class="contact" sm="5" log="4">
+        <b-col class="contact" sm="12" lg="4">
           <div class="sub-title">
             <h3 class="bold">contact</h3>
           </div>
@@ -28,7 +29,7 @@
         </b-col>
 
         <!-- 聯繫表單 -->
-        <b-col sm="5" lg="7">
+        <b-col sm="12" lg="8">
           <Form></Form>
         </b-col>
       </b-row>
@@ -55,20 +56,21 @@ export default class Footer extends Vue {}
 <style scoped>
 #footer {
   background-color: var(--bs-teal);
+  /* padding-bottom: 150px; */
 }
 #footer .title {
   width: 100%;
   text-align: center;
   margin: 80px auto 40px 0;
 }
-.sub-title {
+#footer .sub-title {
   letter-spacing: 3px;
   padding: 20px 0;
 }
-.sub-title h3 {
+#footer .sub-title h3 {
   font-size: 35px;
 }
-.title .col {
+#footer .title .col {
   padding: 0;
 }
 #footer .title h2 {
@@ -76,27 +78,24 @@ export default class Footer extends Vue {}
   padding: 30px;
   font-size: 40px;
 }
-.contact .content,
-.contact .contact-method {
+#footer .contact .content,
+#footer .contact .contact-method {
   line-height: 1.5;
 }
-.form-area {
-  padding-right:0
+#footer .form-area {
+  padding-right: 0;
 }
 
-@media screen and (max-width: 768px) {
-  #footer {
-    padding-bottom: 50px;
-  }
+@media screen and (max-width: 990px) {
   #footer .title {
     width: 100%;
     text-align: center;
     margin: 20px auto 20px 0;
   }
-  .contact {
-    padding-left: 50px;
-    margin-bottom: 50px;
+  #footer .contact {
+    padding-left: calc((100% - 40%) / 2); 
+    padding-right: calc((100% - 40%) / 2);
+    margin-bottom: 30px;
   }
-  
 }
 </style>

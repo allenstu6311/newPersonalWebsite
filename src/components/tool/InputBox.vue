@@ -15,7 +15,6 @@
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
-import { textChangeRangeIsUnchanged } from "typescript";
 
 @Component({
   props: {

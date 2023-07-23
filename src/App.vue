@@ -34,7 +34,7 @@ export default class App extends Vue {
 
 <style>
 #app {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 </style>
 

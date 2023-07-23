@@ -1,5 +1,5 @@
 <template>
-  <div id="experince">
+  <div id="experince" ref="experince">
     <b-row class="custom-row">
       <b-col>
         <div class="title">
@@ -24,7 +24,7 @@
             <b-img :src="picPath.gym" id="gym"></b-img>
           </swiper-slide>
         </swiper>
-        <div class="swiper-pagination"></div>
+        <div class="swiper-pagination" ref="paginationByExperince"></div>
       </b-col>
     </b-row>
     <!-- 燈箱 -->
@@ -100,7 +100,7 @@ export default class Experience extends Vue {
       350: {
         slidesPerView: 1,
       },
-      768: {
+      660: {
         slidesPerView: 2,
       },
       1200:{
@@ -118,6 +118,7 @@ export default class Experience extends Vue {
   };
 
   public showModel: Boolean = false;
+  public paginationHeight:number = 0
 
   callModel(id: string) {
     switch (id) {
@@ -174,6 +175,11 @@ export default class Experience extends Vue {
 
   mounted() {
     this.onSlideChange();
+    // 加入輪播圖按鈕高度
+    const paginationByExperince = this.$refs.paginationByExperince as HTMLElement
+    const experinceHeight:any = this.$refs.experince as HTMLElement
+    this.paginationHeight =  paginationByExperince.clientHeight
+    experinceHeight.style.height = experinceHeight.clientHeight + this.paginationHeight + 'px'
   }
 }
 </script>
@@ -239,9 +245,9 @@ export default class Experience extends Vue {
   background-color: var(--bs-black);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width:990px) {
   #experince{
-    min-height: 70vh;
+    margin-bottom: 30px;
   }
 }
 </style>

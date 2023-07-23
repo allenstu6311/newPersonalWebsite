@@ -2,7 +2,7 @@
   <div class="" id="form">
     <b-form>
       <b-row>
-        <b-col sm="1" lg="6">
+        <b-col sm="12" lg="6">
           <input-box
             label="First Name *"
             @inputBoxOnChange="firstNameOnChange"
@@ -10,7 +10,7 @@
             type="name"
           ></input-box>
         </b-col>
-        <b-col sm="1" lg="6">
+        <b-col sm="12" lg="6">
           <input-box
             label="Last Name *"
             @inputBoxOnChange="lastNameOnChange"
@@ -20,7 +20,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col sm="1" lg="6">
+        <b-col sm="12" lg="6">
           <input-box
             label="Email *"
             @inputBoxOnChange="emailOnChange"
@@ -28,7 +28,7 @@
             type="email"
           ></input-box>
         </b-col>
-        <b-col sm=1 lg="6"> 
+        <b-col sm="12" lg="6"> 
           <input-box
             label="Subject"
             @inputBoxOnChange="subjectOnChange"
@@ -37,7 +37,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col sm="1" lg="12">
+        <b-col sm="12" lg="12">
           <textareaBox
             label="message"
             @textAreaOnChange="messageOnChange"
@@ -210,7 +210,7 @@ export default class Form extends Vue {
 }
 </script>
 <style>
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990px) {
   #form .btn-box{
     text-align: center;
   }

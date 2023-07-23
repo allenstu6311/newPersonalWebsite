@@ -74,7 +74,7 @@ root,
     --bs-body-line-height: 1.5;
     --bs-body-color: #212529;
     --bs-body-color-rgb: 33, 37, 41;
-    --bs-body-bg: #fff;
+    --bs-body-bg: var(--bs-black);
     --bs-body-bg-rgb: 255, 255, 255;
     --bs-emphasis-color: #000;
     --bs-emphasis-color-rgb: 0, 0, 0;
@@ -121,8 +121,9 @@ root,
 * {
     list-style: none;
 }
+
 body{
-    background-color: var(--bs-black);
+    background-color: var(--bs-black) !important;
 }
 /* 容器 */
 body .custom-container {
@@ -247,7 +248,7 @@ body .bold {
     display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990px) {
 
     /* 容器 */
     body .custom-container {
@@ -269,12 +270,9 @@ body .bold {
 
     #bv-modal-resume .modal-content {
         width: 90% !important;
-        height: 90vh;
+        min-height: 90vh;
+        height: 100%;
         right: -5%;
         top: 20px !important;
-    }
-
-    body .tooltip.b-tooltip {
-        display: none;
     }
 }
