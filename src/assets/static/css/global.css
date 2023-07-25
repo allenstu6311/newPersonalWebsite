@@ -122,13 +122,24 @@ root,
     list-style: none;
 }
 
-body{
+body {
     background-color: var(--bs-black) !important;
 }
+
+/* 背景顏色 */
+.main-color {
+    background-color: #8cbdb9;
+}
+
+.sub-color {
+    background-color: #2d3e4e;
+}
+
 /* 容器 */
 body .custom-container {
     width: 100%;
-    height: 90vh;
+    min-height: 90vh;
+    height: 100%;
     position: relative;
 }
 
@@ -175,10 +186,12 @@ body .bold {
 #bv-modal-resume .modal-content {
     width: 100vh !important;
     height: 90vh;
-    right: 25%;
+    position: absolute;
+    right: calc((100% - 100vh) /2);
 }
 
-/* swiper */
+/* --------------------swiper---------------------------- */
+/* 輪播圖的點點 */
 .swiper-pagination-bullet {
     width: 15px;
     height: 15px;
@@ -187,15 +200,17 @@ body .bold {
     margin: 0 3px;
 }
 
+/* active的點點 */
 .swiper-pagination-bullet-active {
-    background-color: var(--bs-primary);
+    /* background-color:#e09e50; */
+    background-color: #E8EC1B;
 }
 
 /* 讓點點使用 absolute 定位 */
 .swiper-pagination {
     display: flex;
     color: #fff;
-    left: 47%;
+    left: calc((100% - 100px) /2);
     position: absolute;
 }
 
@@ -264,7 +279,7 @@ body .bold {
         flex-wrap: wrap;
     }
 
-    .swiper-pagination{
+    .swiper-pagination {
         left: 40%;
     }
 
@@ -272,7 +287,7 @@ body .bold {
         width: 90% !important;
         min-height: 90vh;
         height: 100%;
-        right: -5%;
-        top: 20px !important;
+        top: 20px;
+        right: calc((100% - 90%) /2);
     }
 }

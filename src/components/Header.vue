@@ -174,7 +174,7 @@ export default class Header extends Vue {
       const bottom = targetRect.bottom + window.pageYOffset;
       // console.log("scroll",target +":"+ top +"/" + this.scrollY + "/" + bottom);
 
-      const isInRange = this.scrollY > top -300  && this.scrollY < bottom ;
+      const isInRange = this.scrollY > top -500  && this.scrollY < bottom ;
 
       if (isInRange) {
         this.active = target;
@@ -204,6 +204,7 @@ export default class Header extends Vue {
   top: 0;
   z-index: 100;
   box-shadow: 0px 0px 5px 2px var(--bs-dark-border-subtle);
+  z-index: 1000;
 }
 
 .active a {
@@ -212,7 +213,7 @@ export default class Header extends Vue {
 
 .nav-link:hover,
 .nav-link:focus {
-  --bs-nav-link-hover-color: var(--bs-black);
+  --bs-nav-link-hover-color: var(--bs-link-hover-color);
 }
 .header.sm {
   display: none;
@@ -230,6 +231,7 @@ export default class Header extends Vue {
   .header.sm {
     display: block;
     padding: 0 15px;
+    z-index: 1000;
   }
   .phone-header {
     display: flex;

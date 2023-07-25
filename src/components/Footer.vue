@@ -1,6 +1,6 @@
 <template>
   <!-- class="custom-container" -->
-  <div id="footer">
+  <div id="footer" class="main-color">
     <b-row class="custom-row">
       <!-- 標題 -->
       <b-row class="title">
@@ -55,7 +55,6 @@ export default class Footer extends Vue {}
 </script>
 <style scoped>
 #footer {
-  background-color: var(--bs-teal);
   padding-bottom: 150px;
 }
 #footer .title {

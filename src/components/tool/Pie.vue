@@ -21,6 +21,22 @@ import {
   ArcElement,
 } from "chart.js";
 
+declare module 'chart.js' {
+  interface Legend {
+    afterFit?(): void;
+  }
+}
+
+const labelsFix = {
+  id: 'labelsFix',
+  afterDraw: function (chart: any) {
+    const legend = chart.legend;
+    if (legend) {
+      legend.top=40
+    }
+  },
+};
+
 ChartJS.register(
   Title,
   Tooltip,
@@ -28,7 +44,8 @@ ChartJS.register(
   BarElement,
   CategoryScale,
   LinearScale,
-  ArcElement
+  ArcElement,
+  labelsFix
 );
 
 //定義chart中datasets架構
@@ -93,6 +110,8 @@ export default class PieComponent extends Vue {
     }
   }
 
+
+
   //創建圖表
   createChart() {
     const canvas = document.getElementById("chart") as HTMLCanvasElement;
@@ -111,18 +130,19 @@ export default class PieComponent extends Vue {
             labels: {
               color: "#fff",
               boxWidth: 60,
-              padding: 10,
               font: {
                 size: 17,
               },
             },
+
           },
+
           title: {
             display: true,
             text: "技術總表",
             color: "#fff",
             padding: {
-              top: 10,
+              top: 0,
               bottom: 30,
             },
             font: {
@@ -130,7 +150,10 @@ export default class PieComponent extends Vue {
             },
           },
         },
+
       },
+      plugins: [labelsFix]
+
     });
   }
 }
@@ -138,13 +161,12 @@ export default class PieComponent extends Vue {
 <style>
 #chart {
   width: 100% !important;
-  height: 100%;
   margin: auto;
 }
 
 @media screen and (max-width: 990px) {
   #chart {
-    width: 80% !important;
+    width: 100% !important;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="about">
+  <div id="about" class="main-color">
     <b-row class="custom-row">
       <!-- 個人照片 -->
       <b-col class="pic" sm="12" md="12" lg="6">
@@ -98,6 +98,10 @@ export default class About extends Vue {
   public sendStatus: string = "";
   public hideToolip: string = '';
 
+  mounted() {
+    this.controlTooltip('')
+  }
+
   openCheckModal(e: any) {
     e.preventDefault();
     this.$bvModal.show("bv-modal-check");
@@ -127,9 +131,6 @@ export default class About extends Vue {
 }
 </script>
 <style scoped>
-#about {
-  background-color: var(--bs-teal);
-}
 #about .pic {
   padding: 20px 0px;
   display: flex;

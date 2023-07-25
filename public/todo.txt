@@ -1,5 +1,4 @@
 1.技術總表內容變更(可以的話加入切換動畫)
-2.頁籤icon
 3.圓餅圖文字
 4.copyRight
 5.header 文字hover
