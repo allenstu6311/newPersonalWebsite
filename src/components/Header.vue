@@ -17,7 +17,7 @@
           <b-nav-item
             @click="scrollTo('#experince')"
             :class="{ active: active == '#experince' }"
-            >experince</b-nav-item
+            >Experience</b-nav-item
           >
           <b-nav-item
             @click="scrollTo('#technology')"
@@ -199,6 +199,7 @@ export default class Header extends Vue {
 <style>
 .header {
   width: 100%;
+  padding-left:20px ;
   background-color: var(--bs-body-bg);
   position: fixed;
   top: 0;

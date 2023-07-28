@@ -175,6 +175,7 @@ export default class About extends Vue {
   }
   .content .title h1 {
     font-size: 40px;
+    white-space: nowrap;
   }
 }
 </style>

@@ -67,7 +67,6 @@ export default class PieComponent extends Vue {
   public chartHasShow: boolean = false;
 
   mounted() {
-    let self = this;
     const options = {
       threshold: 0.5, // 進入可視區域超過50%時觸發
     };
@@ -139,7 +138,7 @@ export default class PieComponent extends Vue {
 
           title: {
             display: true,
-            text: "技術總表",
+            text: "使用比例",
             color: "#fff",
             padding: {
               top: 0,

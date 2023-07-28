@@ -107,6 +107,9 @@ export default class Experience extends Vue {
       660: {
         slidesPerView: 2,
       },
+      1000: {
+        slidesPerView: 3,
+      },
       1200: {
         slidesPerView: 3,
       }
@@ -241,7 +244,7 @@ export default class Experience extends Vue {
 }
 
 .swiper-slide img {
-  /* object-fit: cover; */
+  object-fit: cover;
 }
 
 .project-list {
