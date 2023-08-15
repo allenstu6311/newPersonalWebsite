@@ -1,6 +1,6 @@
 const path = require("path");
 const { VueLoaderPlugin } = require('vue-loader')
-
+const SplitTextPlugin = require('split-text');
 module.exports = {
     entry: './src/main.ts',
     output: {
@@ -35,24 +35,25 @@ module.exports = {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [
                     {
-                      loader: 'url-loader', // 將 file-loader 更改為 url-loader
-                      options: {
-                        name: '[name].[ext]',
-                      },
+                        loader: 'url-loader', // 將 file-loader 更改為 url-loader
+                        options: {
+                            name: '[name].[ext]',
+                        },
                     },
-                  ],
+                ],
             }
-        ]
+        ],
     },
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.js',
-            '@': path.resolve(__dirname, 'src/assets/image')
+            '@': path.resolve(__dirname, 'src'),
+            'gsap': path.resolve(__dirname, 'node_modules/gsap/dist/gsap.js')
         },
         extensions: ['.ts', '.js', '.vue'],
     },
 
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
     ],
 }

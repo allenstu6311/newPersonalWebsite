@@ -13,3 +13,12 @@ declare module '*.pdf' {
     export default value;
   }
 
+  declare class SwiperComponent {
+    constructor(container: string | HTMLElement, options?: SwiperOptions)
+  }
+
+declare module 'gsap' {
+  interface SplitText {
+    new (target: string | HTMLElement, vars: object): any;
+  }
+}

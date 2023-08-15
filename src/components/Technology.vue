@@ -44,8 +44,10 @@
 <script lang="ts">
 import Component from "vue-class-component";
 import Vue from "vue";
-import Pie from "./tool/Pie.vue";
-import Button from "./tool/Button.vue";
+// import Pie from "./tool/Pie.vue";
+import Pie from "@/components/tool/Pie.vue"
+// import Button from "./tool/Button.vue";
+import Button from "@/components/tool/Button.vue";
 
 //定義chart中datasets架構
 interface pieDataItem {

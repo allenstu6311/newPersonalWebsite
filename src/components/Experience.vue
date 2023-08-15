@@ -96,7 +96,7 @@ export default class Experience extends Vue {
       clickable: true,
     },
     on: {
-      click: (swiper: any) => {
+      click: (swiper: SwiperComponent|any) => {
         this.callModel(swiper.target.id);
       },
     },
@@ -206,7 +206,7 @@ export default class Experience extends Vue {
     this.onSlideChange();
     // 加入輪播圖按鈕高度
     const paginationByExperince = this.$refs.paginationByExperince as HTMLElement
-    const experinceHeight: any = this.$refs.experince as HTMLElement
+    const experinceHeight = this.$refs.experince as HTMLElement
     this.paginationHeight = paginationByExperince.clientHeight
     experinceHeight.style.height = experinceHeight.clientHeight + this.paginationHeight + 'px'
   }

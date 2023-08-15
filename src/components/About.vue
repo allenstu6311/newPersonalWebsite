@@ -3,12 +3,14 @@
     <b-row class="custom-row">
       <!-- 個人照片 -->
       <b-col class="pic" sm="12" md="12" lg="6">
-        <b-img
-          :src="picPath"
-          rounded="circle"
-          fluid
-          alt="Responsive image"
-        ></b-img>
+        <b-img :src="picPath" rounded="circle" fluid alt="Responsive image" @click="callEmojil">
+
+        </b-img>
+        <!-- <div class="emojil">😀</div> -->
+        <ul class="emojil-list">
+          <li v-for="(item, index) in emolijArr" :key="index" class="emojil" :class="`emojil_${index}`">{{ item }}
+          </li>
+        </ul>
       </b-col>
       <!-- 文字介紹 -->
       <b-col class="content" sm="12" md="12" lg="6">
@@ -25,48 +27,21 @@
         </b-col>
         <!-- 按鈕 -->
         <b-col class="button">
-          <Button
-            label="查看簡歷"
-            id="tooltip-target-1"
-            @btnOnClick="$bvModal.show('bv-modal-resume')"
-          ></Button>
+          <Button label="查看簡歷" id="tooltip-target-1" @btnOnClick="$bvModal.show('bv-modal-resume')"></Button>
           <!-- tip -->
-          <b-tooltip
-            target="tooltip-target-1"
-            triggers="hover"
-            placement="left"
-            v-if="hideToolip == 'show'"
-          >
-            <embed
-              :src="pdfPath"
-              type="application/pdf"
-              width="100%"
-              height="100%"
-            />
+          <b-tooltip target="tooltip-target-1" triggers="hover" placement="left" v-if="hideToolip == 'show'">
+            <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
           </b-tooltip>
         </b-col>
       </b-col>
     </b-row>
     <!-- 履歷燈箱 -->
-    <b-modal
-      id="bv-modal-resume"
-      ok-title="下載"
-      cancel-title="關閉"
-      @ok="openCheckModal"
-      @shown="controlTooltip('show')"
-      @hidden="controlTooltip('')"
-    >
+    <b-modal id="bv-modal-resume" ok-title="下載" cancel-title="關閉" @ok="openCheckModal" @shown="controlTooltip('show')"
+      @hidden="controlTooltip('')">
       <embed :src="pdfPath" type="application/pdf" width="100%" height="100%" />
     </b-modal>
     <!-- 確認燈箱 -->
-    <b-modal
-      id="bv-modal-check"
-      centered
-      ok-title="確定"
-      cancel-title="取消"
-      @ok="download"
-      >確定下載?</b-modal
-    >
+    <b-modal id="bv-modal-check" centered ok-title="確定" cancel-title="取消" @ok="download">確定下載?</b-modal>
     <!-- 通知訊息 -->
     <b-toast id="download-toast" :variant="sendStatus" solid>
       <template #toast-title>
@@ -85,34 +60,73 @@ import Button from "../components/tool/Button.vue";
 import pdfData from "../assets/image/vitae.pdf";
 import personalphoto from "../assets/image/personalphoto.jpg";
 import { saveAs } from "file-saver";
+import { gsap, Power1, Power4 } from "gsap";
+import SharedMixin from "../assets/static/js/util"
 
 @Component({
   components: {
     Button,
   },
+  mixins: [SharedMixin],
 })
 export default class About extends Vue {
   public pdfPath: string = pdfData;
-  public picPath: any = personalphoto;
+  public picPath: string = personalphoto;
   public sendResult: string = "";
   public sendStatus: string = "";
   public hideToolip: string = '';
+  public SharedMixin = new SharedMixin();
+  public emolijArr: string[] = []
+
+
 
   mounted() {
     this.controlTooltip('')
+    let tl: any = gsap.timeline();
+
+
   }
 
-  openCheckModal(e: any) {
+  openCheckModal(e: MouseEvent) {
     e.preventDefault();
     this.$bvModal.show("bv-modal-check");
   }
 
-  controlTooltip(status:string){
-    if(status == 'show'){
+  controlTooltip(status: string) {
+    if (status == 'show') {
       this.hideToolip = 'hide'
-    }else{
+    } else {
       this.hideToolip = 'show'
     }
+  }
+
+
+
+  emojilAnimation() {
+    this.emolijArr.push("😍")
+    let tl: any = gsap.timeline();
+
+    this.$nextTick(() => {
+      tl.set(`emojil_${this.emolijArr.length - 1}`, {
+        scale: .2,
+      })
+
+      tl.to(`.emojil_${this.emolijArr.length - 1}`, 1.5, {
+        x: Math.random() * 200 - 100,
+        y: -150 + Math.random() * 100 - 100,
+        scale: 3,
+        ease: Power4.easeOut,
+      })
+        .to(`.emojil_${this.emolijArr.length - 1}`, 2, {
+          ease: Power1.easeIn,
+          scale: 0
+        })
+
+    })
+  }
+
+  callEmojil() {
+    this.emojilAnimation()
   }
 
   download() {
@@ -136,6 +150,14 @@ export default class About extends Vue {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.emojil {
+  position: absolute;
+  left: 50%;
+  /* bottom: 0; */
+  /* opacity: 0; */
 }
 
 #about .pic img {
@@ -152,6 +174,7 @@ export default class About extends Vue {
   letter-spacing: 3px;
   font-size: 50px;
 }
+
 .content .text {
   width: 80%;
   margin: auto;
@@ -165,14 +188,17 @@ export default class About extends Vue {
   padding-bottom: 30px;
   margin: auto;
 }
+
 .tooltip {
   cursor: pointer;
 }
+
 
 @media screen and (max-width: 990px) {
   #about .button {
     text-align: center;
   }
+
   .content .title h1 {
     font-size: 40px;
     white-space: nowrap;

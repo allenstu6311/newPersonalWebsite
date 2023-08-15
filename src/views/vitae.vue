@@ -17,7 +17,7 @@ import pdfData from '../assets/image/vitae.pdf';
 })
 export default class vitae extends Vue {
     @Prop(String) label!: string;
-    public pdfPath: any = pdfData
+    public pdfPath: string = pdfData
 
 }
 </script>

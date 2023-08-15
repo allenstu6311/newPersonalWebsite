@@ -84,6 +84,7 @@ import Button from "./Button.vue";
 import emailjs from "@emailjs/browser";
 import SharedMixin from "../../assets/static/js/util";
 
+
 //定義信件欄位
 interface MailForamt {
   firstName: string;
@@ -112,7 +113,7 @@ export default class Form extends Vue {
   public SharedMixin = new SharedMixin();
   public sendResult: string = "";
   public sendStatus: string = "";
-  private validateArray: any[] = [];
+  private validateArray: (HTMLElement | null | any)[] = [];
 
   /*更新輸入框*/
   firstNameOnChange(value: string) {

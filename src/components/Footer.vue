@@ -16,7 +16,7 @@
             <h3 class="bold">contact</h3>
           </div>
           <div class="content">
-            <p>聯絡地址:桃園市桃園區力行路622號</p>
+            <p>聯絡地址:桃園市、新北市</p>
           </div>
           <div class="contact-method">
             <p>

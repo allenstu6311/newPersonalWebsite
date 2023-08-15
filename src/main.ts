@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import router from './router'
 import "./assets/static/css/global.css"
 import { BootstrapVue, IconsPlugin, BIcon, BIconArrowUp, BIconArrowDown } from 'bootstrap-vue'
+
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'

@@ -27,9 +27,10 @@ declare module 'chart.js' {
   }
 }
 
+//調整標題距離
 const labelsFix = {
   id: 'labelsFix',
-  afterDraw: function (chart: any) {
+  afterDraw: function (chart: ChartJS) {
     const legend = chart.legend;
     if (legend) {
       legend.top=40
