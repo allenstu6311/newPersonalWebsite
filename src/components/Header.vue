@@ -38,7 +38,7 @@
                 <b-nav-item @click="scrollTo('#about')" :class="{ active: active == '#about' }"
                   v-b-toggle.sidebar-right>About</b-nav-item>
                 <b-nav-item @click="scrollTo('#experince')" :class="{ active: active == '#experince' }"
-                  v-b-toggle.sidebar-right>experince</b-nav-item>
+                  v-b-toggle.sidebar-right>Experince</b-nav-item>
                 <b-nav-item @click="scrollTo('#technology')" :class="{ active: active == '#technology' }"
                   v-b-toggle.sidebar-right>Technology</b-nav-item>
                 <b-nav-item @click="scrollTo('#footer')" :class="{ active: active == '#footer' }"

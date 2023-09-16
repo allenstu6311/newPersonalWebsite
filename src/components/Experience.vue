@@ -18,9 +18,9 @@
           <swiper-slide class="project-list">
             <b-img :src="picPath.cake" id="cake"></b-img>
           </swiper-slide>
-          <swiper-slide class="project-list">
+          <!-- <swiper-slide class="project-list">
             <b-img :src="picPath.gym" id="gym"></b-img>
-          </swiper-slide>
+          </swiper-slide> -->
         </swiper>
         <div class="swiper-pagination" ref="paginationByExperince"></div>
       </b-col>
@@ -175,7 +175,7 @@ export default class Experience extends Vue {
             title: "偷吃蛋糕",
             introduce: "我在學習班的第二次個人專題，主題為蛋糕店，這次的專題理念是針對許多女性愛吃甜點又怕胖，因此寫了一個計算熱量的計算機並且推薦適當的熱量的蛋糕給使用者，讓使用者能夠偷吃蛋糕。",
           },
-          url: 'https://allenstu6311.github.io/Topic-second/',
+          url: 'https://allenstu6311.github.io/CAKE_Project/',
           skills: ["Html", "Css", "Js", "Jquery"]
         };
         break;
