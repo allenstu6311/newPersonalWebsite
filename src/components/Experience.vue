@@ -165,7 +165,7 @@ export default class Experience extends Vue {
           },
           url: 'https://tibamef2e.com/cgd102/g2/',
           skills: ["Vue", "Scss", "Js", "Bootstrap", "Html"]
-        };
+        }
         break;
 
       case "cake":
