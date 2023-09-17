@@ -1,6 +1,6 @@
 <template>
   <!-- class="custom-container" -->
-  <div id="footer" class="main-color">
+  <div id="footer" class="main-color blank">
     <b-row class="custom-row">
       <!-- 標題 -->
       <b-row class="title">
@@ -54,14 +54,6 @@ import Form from "./tool/Form.vue";
 export default class Footer extends Vue {}
 </script>
 <style scoped>
-#footer {
-  padding-bottom: 150px;
-}
-#footer .title {
-  width: 100%;
-  text-align: center;
-  margin: 80px auto 40px 0;
-}
 #footer .sub-title {
   letter-spacing: 3px;
   padding: 20px 0;

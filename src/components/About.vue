@@ -1,5 +1,5 @@
 <template>
-  <div id="about" class="main-color">
+  <div id="about" class="sub-color blank">
     <b-row class="custom-row">
       <!-- 個人照片 -->
       <b-col class="pic" sm="12" md="12" lg="6">
@@ -78,13 +78,9 @@ export default class About extends Vue {
   public SharedMixin = new SharedMixin();
   public emolijArr: string[] = []
 
-
-
   mounted() {
     this.controlTooltip('')
     let tl: any = gsap.timeline();
-
-
   }
 
   openCheckModal(e: MouseEvent) {
@@ -165,22 +161,24 @@ export default class About extends Vue {
   box-shadow: 0px 0px 10px rgb(163, 162, 162);
 }
 
-.content .title {
+/* .content .title {
   text-align: center;
   padding: 50px 20px;
-}
+} */
 
 .content .title h1 {
   letter-spacing: 3px;
   font-size: 50px;
+  color: #fff;
 }
 
 .content .text {
   width: 80%;
   margin: auto;
   line-height: 2;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 2px;
+  color: #fff;
 }
 
 .content .button {

@@ -1,8 +1,13 @@
 <template>
-  <div id="technology" class="custom-container sub-color">
+  <div id="technology" class="custom-container sub-color blank">
+    <b-row class="custom-row">
+      <b-col class="title">
+        <h2 class="bold">專業技能</h2>
+      </b-col>
+    </b-row>
     <b-row class="custom-row">
       <!-- 文字介紹 -->
-      <b-col class="font-content" lg="5" sm="12">
+      <!-- <b-col class="font-content" lg="5" sm="12">
         <b-row class="intrduce" v-show="isFrontEnd">
           <div class="title">
             <h2 class="bold">FRONT-END</h2>
@@ -26,17 +31,20 @@
           </div>
         </b-row>
 
-        <!-- 按鈕 -->
+       
         <b-row class="button-group">
           <Button label="Front-End" @btnOnClick="changePieData(true)"></Button>
           <Button label="Back-End" @btnOnClick="changePieData(false)"></Button>
         </b-row>
-      </b-col>
+      </b-col> -->
 
-      <b-col class="chart" lg="6" sm="12">
-        <!-- 圖形 -->
-        <Pie :pieData="pieData" :pieLabel="pieLabel"></Pie>
+      <b-col class="chart" lg="10" sm="12">
+        <HorizontalBar :newData="pieData" :newLabel="pieLabel"></HorizontalBar>
       </b-col>
+    </b-row>
+    <b-row class="button-group">
+      <Button label="Front-End" @btnOnClick="changePieData(true)"></Button>
+      <Button label="Back-End" @btnOnClick="changePieData(false)"></Button>
     </b-row>
   </div>
 </template>
@@ -44,9 +52,8 @@
 <script lang="ts">
 import Component from "vue-class-component";
 import Vue from "vue";
-// import Pie from "./tool/Pie.vue";
-import Pie from "@/components/tool/Pie.vue"
-// import Button from "./tool/Button.vue";
+import Pie from "@/components/chart/Pie.vue";
+import HorizontalBar from "@/components/chart/HorizontalBar.vue";
 import Button from "@/components/tool/Button.vue";
 
 //定義chart中datasets架構
@@ -59,23 +66,18 @@ interface pieDataItem {
   components: {
     Pie,
     Button,
+    HorizontalBar,
   },
 })
 export default class Technology extends Vue {
   //前端資料
   private frontEndData: pieDataItem[] = [
     {
-      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#0d6efd","#ff69b4"],
-      data: [60, 20, 20, 20,15],
+      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#0d6efd", "#ff69b4"],
+      data: [60, 20, 20, 20, 15],
     },
   ];
-  private frontEndLabel: string[] = [
-    "Vue",
-    "Html",
-    "Css",
-    "Js",
-    "Jquery",
-  ];
+  private frontEndLabel: string[] = ["Vue", "Html", "Css", "Js", "Jquery"];
 
   //後端資料
   private backendData: pieDataItem[] = [
@@ -104,13 +106,6 @@ export default class Technology extends Vue {
 }
 </script>
 <style scoped>
-#technology {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 50px;
-}
-
 .font-content {
   margin: auto;
 }
@@ -141,14 +136,23 @@ export default class Technology extends Vue {
   font-size: 20px;
 }
 
-.font-content .button-group {
+#technology .button-group {
+  width: 100%;
+  margin: auto;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  display: flex;
+  justify-content: center;
   padding: 30px 0;
+  letter-spacing: 2px;
+}
+
+#technology .button-group button {
+  margin: 0 10px;
 }
 
 .chart {
   padding-bottom: 30px;
+  margin: auto;
 }
 
 @media screen and (max-width: 990px) {
@@ -175,4 +179,5 @@ export default class Technology extends Vue {
   .chart {
     width: 100%;
   }
-}</style>
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="experince" ref="experince" class="sub-color">
+  <div id="experince" ref="experince" class="main-color">
     <b-row class="custom-row">
       <b-col>
         <div class="title">
@@ -33,8 +33,8 @@
 
 <script lang="ts">
 import Component from "vue-class-component";
-import { Prop } from "vue-property-decorator";
 import Vue from "vue";
+import { Prop } from "vue-property-decorator";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 import ifrs17Project from "../assets/image/ifrs17Project.jpg";
@@ -253,7 +253,7 @@ export default class Experience extends Vue {
 
 .project-list::before {
   content: "點擊查看更多";
-  width: 100%;
+  width: 94.5%;
   height: 100%;
   background-color: transparent;
   color: #fff;

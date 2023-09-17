@@ -1,10 +1,10 @@
 <template>
-  <canvas id="chart" ref="chartContainer"></canvas>
+  <canvas id="bar" ref="bar"></canvas>
 </template>
-
-
-<script lang="ts">
-import { Pie } from "vue-chartjs";
+  
+  
+  <script lang="ts">
+import { Bar } from "vue-chartjs";
 import { Prop, Watch } from "vue-property-decorator";
 import Component from "vue-class-component";
 import Vue from "vue";
@@ -21,7 +21,7 @@ import {
   ArcElement,
 } from "chart.js";
 
-declare module 'chart.js' {
+declare module "chart.js" {
   interface Legend {
     afterFit?(): void;
   }
@@ -29,11 +29,11 @@ declare module 'chart.js' {
 
 //調整標題距離
 const labelsFix = {
-  id: 'labelsFix',
+  id: "labelsFix",
   afterDraw: function (chart: ChartJS) {
     const legend = chart.legend;
     if (legend) {
-      legend.top=40
+      legend.top = 40;
     }
   },
 };
@@ -57,12 +57,12 @@ interface pieDataItem {
 
 @Component({
   components: {
-    Pie,
+    Bar,
   },
 })
-export default class PieComponent extends Vue {
-  @Prop(Array) pieData!: pieDataItem[];
-  @Prop(Array) pieLabel!: string[];
+export default class HorizontalBar extends Vue {
+  @Prop(Array) newData!: pieDataItem[];
+  @Prop(Array) newLabel!: string[];
 
   private chart: any = null; //chart圖表
   public chartHasShow: boolean = false;
@@ -74,7 +74,7 @@ export default class PieComponent extends Vue {
 
     //瀏覽器提供的方法監視DOM是否進入可是範圍
     const observer = new IntersectionObserver(this.handleIntersection, options);
-    observer.observe(this.$refs.chartContainer as HTMLElement); // 將監聽器綁定到 DOM 元素
+    observer.observe(this.$refs.bar as HTMLElement); // 將監聽器綁定到 DOM 元素
   }
 
   //進入可是範圍才執行畫布渲染
@@ -89,18 +89,20 @@ export default class PieComponent extends Vue {
   }
 
   //監聽data
-  @Watch("pieData", { immediate: true })
+  @Watch("newData", { immediate: true })
   onWatchDataChanded(newVal: pieDataItem[], oldVal: pieDataItem[]) {
     if (newVal != oldVal && this.chartHasShow) {
-      this.$nextTick(() => {
+        this.chart.data.datasets = []
+        this.chart.update();
+      setTimeout(() => {
         this.chart.data.datasets = newVal;
         this.chart.update();
-      });
+      }, 100);
     }
   }
 
   //監聽label
-  @Watch("pieLabel", { immediate: true })
+  @Watch("newLabel", { immediate: true })
   onWatchLabelChanded(newVal: string[], oldVal: string[]) {
     if (newVal != oldVal && this.chartHasShow) {
       this.$nextTick(() => {
@@ -110,62 +112,79 @@ export default class PieComponent extends Vue {
     }
   }
 
-
-
   //創建圖表
   createChart() {
-    const canvas = document.getElementById("chart") as HTMLCanvasElement;
+    const canvas = document.getElementById("bar") as HTMLCanvasElement;
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+
     this.chart = new Chart(ctx, {
-      type: "pie",
+      type: "bar",
+      
       data: {
-        labels: this.pieLabel,
-        datasets: this.pieData,
+        labels: this.newLabel,
+        datasets: this.newData,
+  
       },
       options: {
+        indexAxis: "y",
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            labels: {
+        scales: {
+          y: {
+            ticks: {
               color: "#fff",
-              boxWidth: 60,
               font: {
-                size: 17,
+                size: 20,
+              },
+              
+            },
+      
+          },
+          x: {
+            ticks: {
+              color: "#fff",
+              font: {
+                size: 20,
               },
             },
-
+            max:100
           },
-
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip:{
+            xAlign: 'left'
+          },
           title: {
-            display: true,
-            text: "使用比例",
+            display: false,
+            text: "專業技能",
             color: "#fff",
             padding: {
               top: 0,
               bottom: 30,
             },
             font: {
-              size: 25,
+              size: 30,
             },
           },
         },
-
       },
-      plugins: [labelsFix]
-
+      plugins: [labelsFix],
     });
   }
 }
 </script>
-<style>
-#chart {
+  <style>
+#bar {
   width: 100% !important;
+  height: 500px;
   margin: auto;
 }
 
 @media screen and (max-width: 990px) {
-  #chart {
+  #bar {
     width: 100% !important;
   }
 }

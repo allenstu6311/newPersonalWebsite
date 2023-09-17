@@ -141,11 +141,30 @@ body .custom-container {
     min-height: 90vh;
     height: 100%;
     position: relative;
+
 }
 
 body .custom-row {
+ 
     max-width: 1300px;
     margin: auto;
+}
+
+body .custom-row .title{
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.main-color .custom-row .title{
+    color: #000;
+}
+
+.sub-color .custom-row .title{
+    color: #fff;
+}
+
+body .blank{
+    padding: 50px 0;
 }
 
 /* 圖片 */
@@ -274,6 +293,7 @@ body .bold {
     }
 
     body .custom-row {
+        min-width: none;
         max-width: 1300px;
         margin: auto;
         flex-wrap: wrap;

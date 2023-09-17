@@ -2,7 +2,8 @@
   <div class="home">
     <Banner></Banner>
     <About></About>
-    <Experience></Experience>
+    <!-- <Experience></Experience> -->
+    <SideProject></SideProject>
     <Technology></Technology>
     <Footer></Footer>
   </div>
@@ -17,6 +18,7 @@ import Component from "vue-class-component";
 import Vue from "vue";
 import Footer from "../components/Footer.vue";
 import Experience from "../components/Experience.vue";
+import SideProject from "../components/SideProject.vue";
 
 @Component({
   //引入組件
@@ -25,6 +27,7 @@ import Experience from "../components/Experience.vue";
     About,
     Technology,
     Experience,
+    SideProject,
     Footer
   },
 })

@@ -6,7 +6,7 @@
         <div class="d-flex">
           <b-nav-item @click="scrollTo('#banner')" :class="{ active: active == '#banner' }">Home</b-nav-item>
           <b-nav-item @click="scrollTo('#about')" :class="{ active: active == '#about' }">About</b-nav-item>
-          <b-nav-item @click="scrollTo('#experince')" :class="{ active: active == '#experince' }">Experience</b-nav-item>
+          <b-nav-item @click="scrollTo('#sideProject')" :class="{ active: active == '#sideProject' }">Project</b-nav-item>
           <b-nav-item @click="scrollTo('#technology')"
             :class="{ active: active == '#technology' }">Technology</b-nav-item>
           <b-nav-item @click="scrollTo('#footer')" :class="{ active: active == '#footer' }">Contact</b-nav-item>
@@ -37,8 +37,8 @@
                   v-b-toggle.sidebar-right>Home</b-nav-item>
                 <b-nav-item @click="scrollTo('#about')" :class="{ active: active == '#about' }"
                   v-b-toggle.sidebar-right>About</b-nav-item>
-                <b-nav-item @click="scrollTo('#experince')" :class="{ active: active == '#experince' }"
-                  v-b-toggle.sidebar-right>Experince</b-nav-item>
+                <b-nav-item @click="scrollTo('#sideProject')" :class="{ active: active == '#sideProject' }"
+                  v-b-toggle.sidebar-right>Project</b-nav-item>
                 <b-nav-item @click="scrollTo('#technology')" :class="{ active: active == '#technology' }"
                   v-b-toggle.sidebar-right>Technology</b-nav-item>
                 <b-nav-item @click="scrollTo('#footer')" :class="{ active: active == '#footer' }"
@@ -117,7 +117,7 @@ export default class Header extends Vue {
 
       this.SharedMixin.debounce(()=>this.getComponentHeight("#banner"),100)() ;
       this.SharedMixin.debounce(()=>this.getComponentHeight("#about"),100)() ;
-      this.SharedMixin.debounce(()=>this.getComponentHeight("#experince"),100)() ;
+      this.SharedMixin.debounce(()=>this.getComponentHeight("#sideProject"),100)() ;
       this.SharedMixin.debounce(()=>this.getComponentHeight("#technology"),100)() ;
       this.SharedMixin.debounce(()=>this.getComponentHeight("#footer"),100)() ;
 

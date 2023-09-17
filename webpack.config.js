@@ -48,7 +48,7 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.js',
             '@': path.resolve(__dirname, 'src'),
-            'gsap': path.resolve(__dirname, 'node_modules/gsap/dist/gsap.js')
+            'gsap': path.resolve(__dirname, 'node_modules/gsap')
         },
         extensions: ['.ts', '.js', '.vue'],
     },
