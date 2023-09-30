@@ -27,7 +27,7 @@
     </b-row>
     <!-- 燈箱 -->
     <mdoalByProject :id="modelData.id" :content="modelData.content" :url="modelData.url" :skills="modelData.skills"
-      @clearId="clearId"></mdoalByProject>
+      ></mdoalByProject>
   </div>
 </template>
 
@@ -165,7 +165,7 @@ export default class Experience extends Vue {
           },
           url: 'https://tibamef2e.com/cgd102/g2/',
           skills: ["Vue", "Scss", "Js", "Bootstrap", "Html"]
-        }
+        };
         break;
 
       case "cake":
@@ -194,9 +194,7 @@ export default class Experience extends Vue {
     }
   }
 
-  clearId() {
-    this.modelData.id = "";
-  }
+
 
   onSlideChange() {
     // console.log(this.picPath.cake);
@@ -212,7 +210,7 @@ export default class Experience extends Vue {
   }
 }
 </script>
-<style>
+<style scoped>
 #experince {
   padding-top: 100px;
 }
@@ -247,32 +245,7 @@ export default class Experience extends Vue {
   object-fit: cover;
 }
 
-.project-list {
-  position: relative;
-}
 
-.project-list::before {
-  content: "點擊查看更多";
-  width: 94.5%;
-  height: 100%;
-  background-color: transparent;
-  color: #fff;
-  position: absolute;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  opacity: 0.1;
-  pointer-events: none;
-  font-weight: 900;
-}
-
-.project-list:hover::before {
-  opacity: 0.6;
-  transition: 0.5s;
-  background-color: var(--bs-black);
-}
 
 @media screen and (max-width:990px) {
   #experince {

@@ -2,30 +2,33 @@
   <div id="sideProject" ref="sideProject" class="main-color blank">
     <b-row class="custom-row">
       <b-col class="title">
-        <h2 class="bold">專案經歷</h2>
+        <h2 class="bold"><font-awesome-icon icon="fa-solid fa-building"  class="icon-awesome" />專案經歷</h2>
       </b-col>
     </b-row>
+    <!-- 專案內容 -->
     <b-row class="custom-row">
-      <b-col
-        class="mb-4 project-list"
-        sm="12"
-        md="12"
-        lg="4"
-        v-for="item in projectData"
-        :key="item.id"
-      >
-        <b-img :src="item.pic" @click="callModal(item.id)"></b-img>
+      <b-col class="mb-4 project-item" sm="12" md="6" lg="4" v-for="(item, index) in projectData" :key="item.id">
+        <b-img :src="item.pic" @click="callModal(item.id, 'projectData')"></b-img>
       </b-col>
     </b-row>
+    <!-- 個人作品 -->
+    <b-row class="custom-row sideProject-row">
+      <b-col class="title">
+        <h2 class="bold"><font-awesome-icon :icon="['fas', 'user']"  class="icon-awesome"/>個人作品</h2>
+      </b-col>
+      <swiper class="swiper" :options="swiperOption" @slideChange="onSlideChange" ref="mySwiper">
+        <swiper-slide class="project-list" v-for="item in sideProjectData" :key="item.id" :value="item.id">
+          <b-col class="project-img">
+            <b-img :src="item.pic" :value="item.id"></b-img>
+          </b-col>
 
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-pagination" ref="paginationByExperince"></div>
+    </b-row>
     <!-- 燈箱 -->
-    <mdoalByProject
-      :id="modalData.id"
-      :content="modalData.content"
-      :url="modalData.url"
-      :skills="modalData.skills"
-      @clearId="clearId"
-    ></mdoalByProject>
+    <mdoalByProject :id="modalData.id" :content="modalData.content" :url="modalData.url" , :pic="modalData.pic"
+      :skills="modalData.skills" @clearId="clearId"></mdoalByProject>
   </div>
 </template>
 
@@ -33,43 +36,33 @@
 import Component from "vue-class-component";
 import Vue from "vue";
 import mdoalByProject from "../components/modal/modalByProject.vue";
-import ifrs17Project from "../assets/image/ifrs17Project.jpg";
-import anchuseProject from "../assets/image/anchuseProject.jpg";
-import cakeProject from "../assets/image/cakeProject.jpg";
-import bpmProject from "../assets/image/bpmProject.jpg";
+import profectInfo from "../assets/static/js/projectInfo";
+import { projectFormat } from "../assets/static/js/interfaceFormat";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+/* import specific icons */
+import { faUser,faBuilding } from '@fortawesome/free-solid-svg-icons'
 
-console.log(ScrollTrigger);
+library.add(faUser,faBuilding)
 gsap.registerPlugin(ScrollTrigger);
 
-interface projectInfo {
-  id: string;
-  pic: string;
-  content: {
-    title: string;
-    introduce: string;
-  };
-  url: string;
-  skills: string[];
-}
-
-//圖片路徑架構
-interface picPath {
-  ifrs17: string;
-  anchuse: string;
-  cake: string;
-  bpm: string;
-}
 
 @Component({
   components: {
     mdoalByProject,
+    Swiper,
+    SwiperSlide,
   },
 })
 export default class sideProject extends Vue {
-  public projectData: projectInfo[] = [];
-  public modalData: projectInfo | null = {
+
+  public projectData: projectFormat[] = profectInfo.projectData;
+  public sideProjectData: projectFormat[] = profectInfo.sideProjectData;
+  public modalData: projectFormat = {
     id: "",
     pic: "",
     content: {
@@ -79,85 +72,72 @@ export default class sideProject extends Vue {
     url: "",
     skills: [""],
   };
-  public picPath: picPath = {
-    ifrs17: ifrs17Project,
-    anchuse: anchuseProject,
-    cake: cakeProject,
-    bpm: bpmProject,
+
+
+  //swiper設定
+  public swiperOption = {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    initialSlide: 0,
+    autoplay: {
+      delay: 5000,
+    },
+    on: {
+      click: (e: any) => {
+        this.callModal(String(e.target.getAttribute("value")), 'sideProjectData')
+      }
+    },
+    speed: 1000,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      350: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1040: {
+        slidesPerView: 3,
+      },
+      1200: {
+        slidesPerView: 3,
+      }
+
+    },
   };
 
+  callModal(id: string, dataFrom: string) {
+    let index = ((this as any)[dataFrom] as projectFormat[]).findIndex(item => item.id === id);
+    this.modalData = ((this as any)[dataFrom] as projectFormat[])[index];
+  }
   clearId() {
-    if (this.modalData) {
-      this.modalData.id = "";
-    }
+    this.modalData = {
+      id: "",
+      pic: "",
+      content: {
+        title: "",
+        introduce: "",
+      },
+      url: "",
+      skills: [""],
+    };
+
   }
 
-  callModal(id: string) {
-    console.log(id);
-    switch (id) {
-      case "ifrs17":
-        this.modalData = {
-          id: "ifrs17",
-          pic: this.picPath.ifrs17,
-          content: {
-            title: "IFRS17計算引擎系統",
-            introduce:
-              "IFRS 17是國際會計準則理事會制定的一套重要的會計準則，旨在統一和改進保險合約的會計處理方法，以提供更準確、一致和可比性的財務報告。我在專案主要是負責UI的開發，以及API的串接。",
-          },
-          url: "",
-          skills: ["Vue", "Css", "Html", "Js", "Element"],
-        };
-
-        break;
-
-      case "bpm":
-        this.modalData = {
-          id: "bpm",
-          pic: this.picPath.bpm,
-          content: {
-            title: "BPM系統建置",
-            introduce:
-              "BPM是一種管理方法論，旨在優化和改進組織的業務流程，在這個專案中，前後端都會接觸到，所以在這個案子中負責的領域較廣，有開發API以及前端的資料綁定等等。",
-          },
-          url: "",
-          skills: ["Vue", "Css", "Bootstrap", "Jquery", "Jsp", "Java"],
-        };
-        break;
-
-      case "anchuse":
-        this.modalData = {
-          id: "anchuse",
-          pic: this.picPath.anchuse,
-          content: {
-            title: "按指穴",
-            introduce:
-              "我在學習班的團體專題，主題是按摩養生館，裡面有預約以及購物車等功能，在這個專案中，第一次體驗到團隊開發，有別於過去個人專題只顧自己的開發，在很多東西的配合上產生許多衝突，但也學習到很多。",
-          },
-          url: "https://tibamef2e.com/cgd102/g2/",
-          skills: ["Vue", "Scss", "Js", "Bootstrap", "Html"],
-        };
-        break;
-
-      case "cake":
-        this.modalData = {
-          id: "cake",
-          pic: this.picPath.cake,
-          content: {
-            title: "偷吃蛋糕",
-            introduce:
-              "我在學習班的第二次個人專題，主題為蛋糕店，這次的專題理念是針對許多女性愛吃甜點又怕胖，因此寫了一個計算熱量的計算機並且推薦適當的熱量的蛋糕給使用者，讓使用者能夠偷吃蛋糕。",
-          },
-          url: "https://allenstu6311.github.io/CAKE_Project/",
-          skills: ["Html", "Css", "Js", "Jquery"],
-        };
-        break;
-    }
+  onSlideChange() {
+    // console.log(this.picPath.cake);
   }
 
   mounted() {
+    let self = this
     this.$nextTick(() => {
-      let elements = document.querySelectorAll(".project-list");
-      elements.forEach((element, index) => {
+      let projectItem = document.querySelectorAll(".project-item");
+      let sideProject = document.querySelector(".sideProject-row");
+      projectItem.forEach((element, index) => {
         gsap.to(element, {
           opacity: 1,
           y: -100,
@@ -166,64 +146,117 @@ export default class sideProject extends Vue {
           },
         });
       });
-    });
 
-    this.projectData = [
-      {
-        id: "ifrs17",
-        pic: this.picPath.ifrs17,
-        content: {
-          title: "IFRS17計算引擎系統",
-          introduce:
-            "IFRS 17是國際會計準則理事會制定的一套重要的會計準則，旨在統一和改進保險合約的會計處理方法，以提供更準確、一致和可比性的財務報告。我在專案主要是負責UI的開發，以及API的串接。",
+
+      gsap.to(sideProject, {
+        opacity: 1,
+        y: -200,
+        scrollTrigger: {
+          trigger: sideProject,
         },
-        url: "",
-        skills: ["Vue", "Css", "Html", "Js", "Element"],
-      },
-      {
-        id: "bpm",
-        pic: this.picPath.bpm,
-        content: {
-          title: "BPM系統建置",
-          introduce:
-            "BPM是一種管理方法論，旨在優化和改進組織的業務流程，在這個專案中，前後端都會接觸到，所以在這個案子中負責的領域較廣，有開發API以及前端的資料綁定等等。",
-        },
-        url: "",
-        skills: ["Vue", "Css", "Bootstrap", "Jquery", "Jsp", "Java"],
-      },
-      {
-        id: "anchuse",
-        pic: this.picPath.anchuse,
-        content: {
-          title: "按指穴",
-          introduce:
-            "我在學習班的團體專題，主題是按摩養生館，裡面有預約以及購物車等功能，在這個專案中，第一次體驗到團隊開發，有別於過去個人專題只顧自己的開發，在很多東西的配合上產生許多衝突，但也學習到很多。",
-        },
-        url: "https://tibamef2e.com/cgd102/g2/",
-        skills: ["Vue", "Scss", "Js", "Bootstrap", "Html"],
-      },
-      {
-        id: "cake",
-        pic: this.picPath.cake,
-        content: {
-          title: "偷吃蛋糕",
-          introduce:
-            "我在學習班的第二次個人專題，主題為蛋糕店，這次的專題理念是針對許多女性愛吃甜點又怕胖，因此寫了一個計算熱量的計算機並且推薦適當的熱量的蛋糕給使用者，讓使用者能夠偷吃蛋糕。",
-        },
-        url: "https://allenstu6311.github.io/CAKE_Project/",
-        skills: ["Html", "Css", "Js", "Jquery"],
-      },
-    ];
+      })
+    });
   }
 }
 </script>
 <style>
-.project-list {
+.project-item {
   opacity: 0;
   position: relative;
   bottom: -100px;
 }
-.project-list img{
-    border-radius: 5px;
+
+.project-item img {
+  border-radius: 5px;
+}
+
+.project-item,
+.project-list {
+  position: relative;
+}
+
+.project-item::before {
+  content: "點擊查看更多";
+  width: 94.5%;
+  height: 100%;
+  background-color: transparent;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  opacity: 0.1;
+  pointer-events: none;
+  font-weight: 900;
+}
+
+.project-list:hover::before {
+  opacity: 0.6;
+  transition: 0.5s;
+  background-color: var(--bs-black);
+}
+
+
+.project-list::before {
+  content: "點擊查看更多";
+  width: 100%;
+  height: 96%;
+  background-color: transparent;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  opacity: 0.1;
+  pointer-events: none;
+  font-weight: 900;
+}
+
+.project-item:hover::before {
+  opacity: 0.6;
+  transition: 0.5s;
+  background-color: var(--bs-black);
+}
+
+.sideProject-row {
+  opacity: 0;
+  position: relative;
+  bottom: -200px;
+}
+
+.swiper-container {
+  height: 100% !important;
+}
+
+.swiper {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+.swiper-slide {
+  cursor: pointer;
+}
+
+.swiper-slide img {
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.button.prev .icon {
+  transform: rotate(31deg);
+  font-size: 30px;
+}
+
+.swiper-pagination {
+  position: relative;
+  /* position: relative;
+  text-align: center;
+  left: calc((100% - 100px) /2); */
 }
 </style>

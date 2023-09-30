@@ -2,42 +2,10 @@
   <div id="technology" class="custom-container sub-color blank">
     <b-row class="custom-row">
       <b-col class="title">
-        <h2 class="bold">專業技能</h2>
+        <h2 class="bold"><font-awesome-icon :icon="['fas', 'book']" class="icon-awesome"/>專業技能</h2>
       </b-col>
     </b-row>
     <b-row class="custom-row">
-      <!-- 文字介紹 -->
-      <!-- <b-col class="font-content" lg="5" sm="12">
-        <b-row class="intrduce" v-show="isFrontEnd">
-          <div class="title">
-            <h2 class="bold">FRONT-END</h2>
-          </div>
-          <div class="content">
-            <p>
-              在公司專案中我主要負責前端UI開發以及API的串接以及一些後端的修改，前端排版主要使用element
-              plus以及bootstrap，目前框架都是使用Vue為主。
-            </p>
-          </div>
-        </b-row>
-
-        <b-row class="intrduce" v-show="!isFrontEnd">
-          <div class="title">
-            <h2 class="bold">BACK-END</h2>
-          </div>
-          <div class="content">
-            <p>
-              除了UI開發及API串接外，有時也要幫忙開發後端，目前公司主要是以java為主，自己私底下則會接觸NodeJs，過去在學習班也有使用過php。
-            </p>
-          </div>
-        </b-row>
-
-       
-        <b-row class="button-group">
-          <Button label="Front-End" @btnOnClick="changePieData(true)"></Button>
-          <Button label="Back-End" @btnOnClick="changePieData(false)"></Button>
-        </b-row>
-      </b-col> -->
-
       <b-col class="chart" lg="10" sm="12">
         <HorizontalBar :newData="pieData" :newLabel="pieLabel"></HorizontalBar>
       </b-col>
@@ -55,6 +23,12 @@ import Vue from "vue";
 import Pie from "@/components/chart/Pie.vue";
 import HorizontalBar from "@/components/chart/HorizontalBar.vue";
 import Button from "@/components/tool/Button.vue";
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+/* import specific icons */
+import { faBook } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBook)
 
 //定義chart中datasets架構
 interface pieDataItem {
@@ -74,7 +48,7 @@ export default class Technology extends Vue {
   private frontEndData: pieDataItem[] = [
     {
       backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#0d6efd", "#ff69b4"],
-      data: [60, 20, 20, 20, 15],
+      data: [65, 50, 50, 60, 40],
     },
   ];
   private frontEndLabel: string[] = ["Vue", "Html", "Css", "Js", "Jquery"];
@@ -83,7 +57,7 @@ export default class Technology extends Vue {
   private backendData: pieDataItem[] = [
     {
       backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
-      data: [60, 20, 10],
+      data: [60, 50, 30],
     },
   ];
   private backendLabel: string[] = ["Java", "Nodejs", "Php"];

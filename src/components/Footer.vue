@@ -5,7 +5,7 @@
       <!-- 標題 -->
       <b-row class="title">
         <b-col class="">
-          <h2>GET IN TOUCH!</h2>
+          <h2 class="bold" style="color:#000">GET IN TOUCH!</h2>
         </b-col>
       </b-row>
       <!-- 表單區域 -->
@@ -20,7 +20,10 @@
           </div>
           <div class="contact-method">
             <p>
-              Tel: 0975119303​<br />
+              Tel: 0975119303​
+             
+            </p>
+            <p>
               email: stuallen6311@gmail.com
             </p>
           </div>
@@ -54,9 +57,13 @@ import Form from "./tool/Form.vue";
 export default class Footer extends Vue {}
 </script>
 <style scoped>
+#footer{
+  padding-bottom: 150px;
+}
 #footer .sub-title {
   letter-spacing: 3px;
   padding: 20px 0;
+
 }
 #footer .sub-title h3 {
   font-size: 35px;
@@ -87,8 +94,8 @@ export default class Footer extends Vue {}
     margin: 20px auto 20px 0;
   }
   #footer .contact {
-    padding-left: calc((100% - 40%) / 2); 
-    padding-right: calc((100% - 40%) / 2);
+    padding-left: calc((100% - 65%) / 2); 
+    padding-right: calc((100% - 70%) / 2);
     margin-bottom: 30px;
   }
 }

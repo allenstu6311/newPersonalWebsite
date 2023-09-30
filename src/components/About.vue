@@ -4,9 +4,7 @@
       <!-- 個人照片 -->
       <b-col class="pic" sm="12" md="12" lg="6">
         <b-img :src="picPath" rounded="circle" fluid alt="Responsive image" @click="callEmojil">
-
         </b-img>
-        <!-- <div class="emojil">😀</div> -->
         <ul class="emojil-list">
           <li v-for="(item, index) in emolijArr" :key="index" class="emojil" :class="`emojil_${index}`">{{ item }}
           </li>
@@ -159,6 +157,7 @@ export default class About extends Vue {
 #about .pic img {
   width: 70%;
   box-shadow: 0px 0px 10px rgb(163, 162, 162);
+  cursor: pointer;
 }
 
 /* .content .title {

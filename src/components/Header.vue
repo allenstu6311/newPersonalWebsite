@@ -97,6 +97,14 @@ export default class Header extends Vue {
       this.siderBarShowed = false;
       // this.$refs.sidebarRight.toggle()
       const element = document.querySelector(target) as HTMLElement;
+
+      //清除focus狀態
+      let headerList = document.querySelectorAll(".nav-link")
+      Array.from(headerList).forEach(child => {
+        (child as HTMLElement).blur();
+      });
+
+
       if (element) {
         const offset = this.headerHeightInfo; // 調整的像素距離
         window.scrollTo({
@@ -115,28 +123,29 @@ export default class Header extends Vue {
     } else {
       this.scrollY = document.documentElement.scrollTop + this.headerHeightInfo;
 
-      this.SharedMixin.debounce(()=>this.getComponentHeight("#banner"),100)() ;
-      this.SharedMixin.debounce(()=>this.getComponentHeight("#about"),100)() ;
-      this.SharedMixin.debounce(()=>this.getComponentHeight("#sideProject"),100)() ;
-      this.SharedMixin.debounce(()=>this.getComponentHeight("#technology"),100)() ;
-      this.SharedMixin.debounce(()=>this.getComponentHeight("#footer"),100)() ;
+      this.SharedMixin.debounce(() => this.getComponentHeight("#banner"), 100)();
+      this.SharedMixin.debounce(() => this.getComponentHeight("#about"), 100)();
+      this.SharedMixin.debounce(() => this.getComponentHeight("#sideProject"), 100)();
+      this.SharedMixin.debounce(() => this.getComponentHeight("#technology"), 100)();
+      this.SharedMixin.debounce(() => this.getComponentHeight("#footer"), 100)();
 
     }
   }
 
   //取得組件的範圍並且判斷
-   getComponentHeight(target: string) {
+  getComponentHeight(target: string) {
     this.$nextTick(() => {
       let targetElement = document.querySelector(target) as HTMLElement;
       const targetRect = targetElement.getBoundingClientRect();
       const top = targetRect.top + window.pageYOffset;
       const bottom = targetRect.bottom + window.pageYOffset;
       // console.log("scroll",target +":"+ top +"/" + this.scrollY + "/" + bottom);
-      console.log('test2')
       const isInRange = this.scrollY > top - 500 && this.scrollY < bottom;
 
       if (isInRange) {
         this.active = target;
+
+
       }
     });
   }
@@ -150,8 +159,8 @@ export default class Header extends Vue {
         ? headerHeightElementLg.clientHeight
         : headerHeightElementSm.clientHeight;
 
-    window.addEventListener("load", this.SharedMixin.debounce(this.getScrollHeight,500));
-    window.addEventListener("scroll", this.SharedMixin.debounce(this.getScrollHeight,100));
+    window.addEventListener("load", this.SharedMixin.debounce(this.getScrollHeight, 500));
+    window.addEventListener("scroll", this.SharedMixin.debounce(this.getScrollHeight, 100));
 
   }
 
@@ -169,6 +178,7 @@ export default class Header extends Vue {
   box-shadow: 0px 0px 5px 2px var(--bs-dark-border-subtle);
   z-index: 1000;
 }
+
 
 .active a {
   color: var(--bs-link-hover-color) !important;

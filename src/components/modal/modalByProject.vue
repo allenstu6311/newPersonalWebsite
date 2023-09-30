@@ -1,22 +1,23 @@
 <template>
-    <b-modal :id="`modal-${modelId}`" centered size="lg" :title="content.title" @hide="clearId" ok-only ok-title="關閉"
+    <b-modal :id="`modal-${modelId}`" centered size="lg" :title="content.title"  @hide="closeModal" ok-only ok-title="關閉"
         title-class="bold">
         <b-row>
             <b-col sm="12" lg="5" md="12" class="modalPic">
-                <b-img :src="picPath"></b-img>
+                <b-img :src="pic"></b-img>
             </b-col>
             <b-col class="modal-content">
                 <div class="introduce">
                     <p>{{ content.introduce }}</p>
                 </div>
                 <div class="skills_content">
-                    <span>使用技術:</span><div v-for="item in skills" :key="item" class="skills-box"><span
+                    <span>使用技術:</span>
+                    <div v-for="item in skills" :key="item" class="skills-box"><span
                             :class="`skills skills_${item}`"></span><span>{{ item }}</span>
                     </div>
                 </div>
                 <div class="url">
                     <p>連結:
-                        <a :href="url" v-if="url"> {{ url }}</a>
+                        <a :href="url" v-if="url"  target="_blank"> {{ url }}</a>
                         <span v-if="!url" style="color: red;">不好意思，因為是內部系統，無法提供連結!</span>
                     </p>
                 </div>
@@ -29,21 +30,17 @@
 import Component from "vue-class-component";
 import Vue from "vue";
 import { Watch, Prop } from "vue-property-decorator";
-import ifrs17Project from "../../assets/image/ifrs17Project.jpg"
-import anchuseProject from "../../assets/image/anchuseProject.jpg"
-import cakeProject from "../../assets/image/cakeProject.jpg"
-import gymProject from "../../assets/image/gymProject.jpg"
-import bpmProject from "../../assets/image/bpmProject.jpg"
 
 interface propsContent {
-    title:String,
-    introduce:String,
+    title: String,
+    introduce: String,
 
 }
 
 @Component({
     props: {
         id: String,
+        pic: String,
         content: Object,
         url: String,
         skills: Array,
@@ -52,11 +49,12 @@ interface propsContent {
 
 export default class mdoelByProject extends Vue {
     @Prop(String) id!: string;
+    @Prop(String) pic!: string;
     @Prop(Object) content!: propsContent
     @Prop(String) url!: string
     @Prop(Array) skills!: string[]
 
-    public modelId: string = this.id
+    public modelId: string = ''
     public picPath: string = ''
 
     //根據傳入的id判斷
@@ -64,24 +62,18 @@ export default class mdoelByProject extends Vue {
     showModel(newVal: string) {
         this.modelId = newVal
         if (newVal) {
+          
             this.$nextTick(() => {
-                switch (newVal) {
-                    case 'ifrs17': this.picPath = ifrs17Project; break;
-                    case 'anchuse': this.picPath = anchuseProject; break;
-                    case 'cake': this.picPath = cakeProject; break;
-                    case 'gym': this.picPath = gymProject; break;
-                    case 'bpm': this.picPath = bpmProject; break;
-                }
-                this.modelId = newVal
-                this.$bvModal.show(`modal-${newVal}`)
+                this.$bvModal.show(`modal-${this.modelId}`)
             })
+
         }
     }
 
-    clearId() {
-        this.$emit("clearId")
+    closeModal(){
+        this.modelId = ""
+        this.$emit('clearId')
     }
-
     mounted() {
         // console.log(this.id)
     }

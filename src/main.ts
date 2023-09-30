@@ -9,7 +9,21 @@ import { BootstrapVue, IconsPlugin, BIcon, BIconArrowUp, BIconArrowDown } from '
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+// /* import the fontawesome core */
+// import { library } from '@fortawesome/fontawesome-svg-core'
 
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+
+
+/* add icons to the library */
+
+
+/* add font awesome icon component */
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 // Make BootstrapVue available throughout your project
