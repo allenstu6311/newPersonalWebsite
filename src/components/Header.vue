@@ -4,12 +4,31 @@
       <b-nav class="custom-row">
         <icon-list></icon-list>
         <div class="d-flex">
-          <b-nav-item @click="scrollTo('#banner')" :class="{ active: active == '#banner' }">Home</b-nav-item>
-          <b-nav-item @click="scrollTo('#about')" :class="{ active: active == '#about' }">About</b-nav-item>
-          <b-nav-item @click="scrollTo('#sideProject')" :class="{ active: active == '#sideProject' }">Project</b-nav-item>
-          <b-nav-item @click="scrollTo('#technology')"
-            :class="{ active: active == '#technology' }">Technology</b-nav-item>
-          <b-nav-item @click="scrollTo('#footer')" :class="{ active: active == '#footer' }">Contact</b-nav-item>
+          <b-nav-item
+            @click="scrollTo('#banner')"
+            :class="{ active: active == '#banner' }"
+            >Home</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#about')"
+            :class="{ active: active == '#about' }"
+            >About</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#sideProject')"
+            :class="{ active: active == '#sideProject' }"
+            >Project</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#technology')"
+            :class="{ active: active == '#technology' }"
+            >Technology</b-nav-item
+          >
+          <b-nav-item
+            @click="scrollTo('#footer')"
+            :class="{ active: active == '#footer' }"
+            >Contact</b-nav-item
+          >
         </div>
       </b-nav>
     </div>
@@ -26,23 +45,50 @@
       </div>
 
       <!-- sidebar -->
-      <b-sidebar id="sidebar-right" aria-labelledby="sidebar-no-header-title" shadow right backdrop
-        @shown="siderBarShowed = true" @hidden="siderBarShowed = false">
+      <b-sidebar
+        id="sidebar-right"
+        aria-labelledby="sidebar-no-header-title"
+        shadow
+        right
+        backdrop
+        @shown="siderBarShowed = true"
+        @hidden="siderBarShowed = false"
+      >
         <template>
           <div class="pt-5 sidebar-content">
             <!-- <icon-list></icon-list> -->
             <nav class="sidebar-url">
               <b-nav vertical>
-                <b-nav-item @click="scrollTo('#banner')" :class="{ active: active == '#banner' }"
-                  v-b-toggle.sidebar-right>Home</b-nav-item>
-                <b-nav-item @click="scrollTo('#about')" :class="{ active: active == '#about' }"
-                  v-b-toggle.sidebar-right>About</b-nav-item>
-                <b-nav-item @click="scrollTo('#sideProject')" :class="{ active: active == '#sideProject' }"
-                  v-b-toggle.sidebar-right>Project</b-nav-item>
-                <b-nav-item @click="scrollTo('#technology')" :class="{ active: active == '#technology' }"
-                  v-b-toggle.sidebar-right>Technology</b-nav-item>
-                <b-nav-item @click="scrollTo('#footer')" :class="{ active: active == '#footer' }"
-                  v-b-toggle.sidebar-right>Contact</b-nav-item>
+                <b-nav-item
+                  @click="scrollTo('#banner')"
+                  :class="{ active: active == '#banner' }"
+                  v-b-toggle.sidebar-right
+                  >Home</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#about')"
+                  :class="{ active: active == '#about' }"
+                  v-b-toggle.sidebar-right
+                  >About</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#sideProject')"
+                  :class="{ active: active == '#sideProject' }"
+                  v-b-toggle.sidebar-right
+                  >Project</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#technology')"
+                  :class="{ active: active == '#technology' }"
+                  v-b-toggle.sidebar-right
+                  >Technology</b-nav-item
+                >
+                <b-nav-item
+                  @click="scrollTo('#footer')"
+                  :class="{ active: active == '#footer' }"
+                  v-b-toggle.sidebar-right
+                  >Contact</b-nav-item
+                >
               </b-nav>
             </nav>
           </div>
@@ -58,13 +104,12 @@ import { Prop, Watch } from "vue-property-decorator";
 import Vue from "vue";
 import { routes } from "../router/index";
 import IconList from "./tool/IconList.vue";
-import SharedMixin from "../assets/static/js/util"
+import SharedMixin from "../assets/static/js/util";
 
 @Component({
   props: ["index"],
   components: {
     IconList,
-
   },
   mixins: [SharedMixin],
 })
@@ -99,11 +144,10 @@ export default class Header extends Vue {
       const element = document.querySelector(target) as HTMLElement;
 
       //清除focus狀態
-      let headerList = document.querySelectorAll(".nav-link")
-      Array.from(headerList).forEach(child => {
+      let headerList = document.querySelectorAll(".nav-link");
+      Array.from(headerList).forEach((child) => {
         (child as HTMLElement).blur();
       });
-
 
       if (element) {
         const offset = this.headerHeightInfo; // 調整的像素距離
@@ -115,7 +159,6 @@ export default class Header extends Vue {
     });
   }
 
-
   // 取得滾輪當前位置
   getScrollHeight() {
     if (this.$route.path != "/") {
@@ -123,12 +166,23 @@ export default class Header extends Vue {
     } else {
       this.scrollY = document.documentElement.scrollTop + this.headerHeightInfo;
 
-      this.SharedMixin.debounce(() => this.getComponentHeight("#banner"), 100)();
+      this.SharedMixin.debounce(
+        () => this.getComponentHeight("#banner"),
+        100
+      )();
       this.SharedMixin.debounce(() => this.getComponentHeight("#about"), 100)();
-      this.SharedMixin.debounce(() => this.getComponentHeight("#sideProject"), 100)();
-      this.SharedMixin.debounce(() => this.getComponentHeight("#technology"), 100)();
-      this.SharedMixin.debounce(() => this.getComponentHeight("#footer"), 100)();
-
+      this.SharedMixin.debounce(
+        () => this.getComponentHeight("#sideProject"),
+        100
+      )();
+      this.SharedMixin.debounce(
+        () => this.getComponentHeight("#technology"),
+        100
+      )();
+      this.SharedMixin.debounce(
+        () => this.getComponentHeight("#footer"),
+        100
+      )();
     }
   }
 
@@ -144,8 +198,6 @@ export default class Header extends Vue {
 
       if (isInRange) {
         this.active = target;
-
-
       }
     });
   }
@@ -159,12 +211,15 @@ export default class Header extends Vue {
         ? headerHeightElementLg.clientHeight
         : headerHeightElementSm.clientHeight;
 
-    window.addEventListener("load", this.SharedMixin.debounce(this.getScrollHeight, 500));
-    window.addEventListener("scroll", this.SharedMixin.debounce(this.getScrollHeight, 100));
-
+    window.addEventListener(
+      "load",
+      this.SharedMixin.debounce(this.getScrollHeight, 500)
+    );
+    window.addEventListener(
+      "scroll",
+      this.SharedMixin.debounce(this.getScrollHeight, 100)
+    );
   }
-
-
 }
 </script>
 <style>
@@ -178,7 +233,6 @@ export default class Header extends Vue {
   box-shadow: 0px 0px 5px 2px var(--bs-dark-border-subtle);
   z-index: 1000;
 }
-
 
 .active a {
   color: var(--bs-link-hover-color) !important;
